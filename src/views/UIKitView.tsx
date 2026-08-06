@@ -19,6 +19,21 @@ import {
   XCircle,
 } from 'lucide-react';
 
+import emptyCommentIllustration from '../assets/ui-kit-empty/empty-comment.png';
+import emptyDataIllustration from '../assets/ui-kit-empty/empty-data.png';
+import emptyLocationIllustration from '../assets/ui-kit-empty/empty-location.png';
+import emptyMessageIllustration from '../assets/ui-kit-empty/empty-message.png';
+import emptyOrderIllustration from '../assets/ui-kit-empty/empty-order.png';
+import emptyPostIllustration from '../assets/ui-kit-empty/empty-post.png';
+import emptyStateIllustration from '../assets/ui-kit-empty/empty-state.png';
+import emptyWorkIllustration from '../assets/ui-kit-empty/empty-work.png';
+import failureIllustration from '../assets/ui-kit-empty/failure.png';
+import loadingIllustration from '../assets/ui-kit-empty/loading.png';
+import maintenanceIllustration from '../assets/ui-kit-empty/maintenance.png';
+import networkErrorIllustration from '../assets/ui-kit-empty/network-error.png';
+import notificationIllustration from '../assets/ui-kit-empty/notification.png';
+import successIllustration from '../assets/ui-kit-empty/success.png';
+
 const colors = [
   { name: 'Primary', token: 'Indigo 600', value: '#4F46E5', className: 'bg-indigo-600' },
   { name: 'Primary Soft', token: 'Indigo 50', value: '#EEF2FF', className: 'bg-indigo-50' },
@@ -115,6 +130,31 @@ const notifications = [
 
 const radioOptions = ['全部订单', '仅待审核', '仅异常订单'];
 const checkboxOptions = ['显示库存预警', '包含退款订单', '隐藏已归档数据'];
+
+const emptyStatePalette = [
+  { name: '主蓝', value: '#4A9EFF', className: 'bg-[#4A9EFF]' },
+  { name: '深蓝', value: '#2F7EF7', className: 'bg-[#2F7EF7]' },
+  { name: '浅蓝', value: '#8CC7FF', className: 'bg-[#8CC7FF]' },
+  { name: '高光', value: '#DFF2FF', className: 'bg-[#DFF2FF]' },
+  { name: '强调色', value: '#FF7A59', className: 'bg-[#FF7A59]' },
+];
+
+const emptyStateIllustrations = [
+  { title: '空状态', usage: '通用无内容页面', image: emptyStateIllustration },
+  { title: '数据为空', usage: '报表、列表无数据', image: emptyDataIllustration },
+  { title: '暂无消息', usage: '消息、通知收件箱', image: emptyMessageIllustration },
+  { title: '暂无订单', usage: '订单列表、售后列表', image: emptyOrderIllustration },
+  { title: '暂无评论', usage: '评价、备注、反馈', image: emptyCommentIllustration },
+  { title: '暂无新帖', usage: '内容、公告、帖子', image: emptyPostIllustration },
+  { title: '暂无工作', usage: '待办、任务工作台', image: emptyWorkIllustration },
+  { title: '无法定位', usage: '地址、门店、地图', image: emptyLocationIllustration },
+  { title: '网络出错', usage: '接口失败、离线状态', image: networkErrorIllustration },
+  { title: '加载中', usage: '异步请求等待', image: loadingIllustration },
+  { title: '成功', usage: '任务完成反馈', image: successIllustration },
+  { title: '失败', usage: '流程失败反馈', image: failureIllustration },
+  { title: '系统维护', usage: '停机、权限维护', image: maintenanceIllustration },
+  { title: '消息通知', usage: '通知入口、提醒状态', image: notificationIllustration },
+];
 
 const UiSection: React.FC<{
   icon: React.ElementType;
@@ -403,45 +443,78 @@ export const UIKitView: React.FC = () => {
         </UiSection>
       </div>
 
-      <UiSection icon={Inbox} title="缺省图 Empty State" description="无数据、无搜索结果和初始化状态统一使用轻量插画、明确标题与下一步操作。">
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-indigo-200 bg-indigo-50/50 px-6 py-8 text-center">
-            <div className="relative mb-5 h-28 w-36">
-              <div className="absolute left-5 top-8 h-20 w-28 rounded-2xl border border-indigo-200 bg-white shadow-sm" />
-              <div className="absolute left-0 top-2 h-12 w-20 rounded-xl border border-gray-200 bg-white shadow-xs" />
-              <div className="absolute right-0 top-0 h-14 w-24 rounded-xl border border-gray-200 bg-white shadow-xs" />
-              <div className="absolute left-10 top-14 flex h-14 w-16 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
-                <Inbox className="h-7 w-7" />
+      <UiSection icon={Inbox} title="缺省图 Empty State" description="提取小蓝插画体系，用于无数据、无结果、网络错误和流程反馈等轻量状态。">
+        <div className="space-y-5">
+          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex min-h-72 flex-col items-center justify-center rounded-xl border border-dashed border-indigo-200 bg-indigo-50/50 px-6 py-8 text-center">
+              <img
+                src={emptyStateIllustration}
+                alt="空状态小蓝插画"
+                className="mb-4 h-44 w-auto max-w-full object-contain"
+              />
+              <h3 className="text-sm font-bold text-gray-900">暂无数据</h3>
+              <p className="mt-2 max-w-sm text-xs leading-5 text-gray-500">
+                当前筛选条件下没有可展示内容，可调整筛选条件或新建一条记录。
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                <button className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-indigo-700">
+                  <Plus className="h-4 w-4" />
+                  新建记录
+                </button>
+                <button className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 font-semibold text-gray-700 hover:bg-gray-50">
+                  <Search className="h-4 w-4" />
+                  调整筛选
+                </button>
               </div>
-              <div className="absolute bottom-2 right-6 h-3 w-3 rounded-full bg-emerald-400" />
-              <div className="absolute bottom-0 left-8 h-2 w-16 rounded-full bg-indigo-200" />
             </div>
-            <h3 className="text-sm font-bold text-gray-900">暂无数据</h3>
-            <p className="mt-2 max-w-sm text-xs leading-5 text-gray-500">
-              当前筛选条件下没有可展示内容，可调整筛选条件或新建一条记录。
-            </p>
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-indigo-700">
-                <Plus className="h-4 w-4" />
-                新建记录
-              </button>
-              <button className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 font-semibold text-gray-700 hover:bg-gray-50">
-                <Search className="h-4 w-4" />
-                调整筛选
-              </button>
+
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <div className="text-sm font-bold text-gray-900">插画规范</div>
+              <p className="mt-1 text-xs leading-5 text-gray-500">
+                角色统一使用高饱和蓝色、柔和阴影和少量橙色强调，适合放在白色或浅蓝底的缺省容器中。
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-5">
+                {emptyStatePalette.map((color) => (
+                  <div key={color.name} className="rounded-xl border border-gray-200 bg-white p-2">
+                    <div className={`h-10 rounded-lg ${color.className}`} />
+                    <div className="mt-2 text-xs font-bold text-gray-900">{color.name}</div>
+                    <div className="font-mono text-xs text-gray-500">{color.value}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {[
+                  ['展示尺寸', '主图 160-220px，小卡 96-128px'],
+                  ['推荐容器', '白底、浅蓝底、虚线边框'],
+                  ['文案层级', '14px 标题 + 12px 说明'],
+                ].map(([title, detail]) => (
+                  <div key={title} className="rounded-xl border border-gray-200 bg-white p-3">
+                    <div className="text-sm font-bold text-gray-900">{title}</div>
+                    <div className="mt-1 text-xs leading-5 text-gray-500">{detail}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {[
-              ['无数据', '首次进入、暂无记录'],
-              ['无结果', '搜索或筛选无匹配'],
-              ['无权限', '功能受角色权限限制'],
-            ].map(([title, detail]) => (
-              <div key={title} className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-                <div className="text-sm font-bold text-gray-900">{title}</div>
-                <div className="mt-1 text-xs leading-5 text-gray-500">{detail}</div>
-              </div>
-            ))}
+
+          <div>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="text-sm font-bold text-gray-900">常用缺省状态图库</div>
+              <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-700">
+                {emptyStateIllustrations.length} 个状态
+              </span>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+              {emptyStateIllustrations.map((item) => (
+                <div key={item.title} className="rounded-xl border border-gray-200 bg-white p-3 text-center shadow-xs">
+                  <div className="flex h-28 items-center justify-center rounded-lg bg-gray-50">
+                    <img src={item.image} alt={`${item.title}插画`} className="max-h-24 max-w-full object-contain" />
+                  </div>
+                  <div className="mt-3 text-sm font-bold text-gray-900">{item.title}</div>
+                  <div className="mt-1 text-xs leading-5 text-gray-500">{item.usage}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </UiSection>
