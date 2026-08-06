@@ -21,6 +21,7 @@ import { AnalyticsView } from './views/AnalyticsView';
 import { SettingsView } from './views/SettingsView';
 import { AbnormalRefundsView } from './views/AbnormalRefundsView';
 import { LogisticsView } from './views/LogisticsView';
+import { UIKitView } from './views/UIKitView';
 
 import {
   MOCK_ORDERS,
@@ -340,6 +341,8 @@ export default function App() {
               onNavigate={(path) => setActivePath(path)}
             />
           )}
+
+          {activePath === '/ui-kit' && <UIKitView />}
 
           {activePath.startsWith('/products') && (
             <ProductsView

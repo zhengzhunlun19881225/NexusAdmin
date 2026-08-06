@@ -68,6 +68,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   ShieldCheck,
   FileText,
   KeyRound,
+  Sparkles,
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({

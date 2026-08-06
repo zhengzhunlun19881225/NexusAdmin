@@ -149,6 +149,12 @@ export const MENU_TREE: MenuItem[] = [
     path: '/dashboard',
   },
   {
+    id: 'ui-kit',
+    title: 'UI kit',
+    iconName: 'Sparkles',
+    path: '/ui-kit',
+  },
+  {
     id: 'orders',
     title: '订单数据管理',
     iconName: 'ShoppingBag',
@@ -1637,6 +1643,5 @@ export const MOCK_STOCK_ALERTS: StockAlertItem[] = [
     lastStockCheck: '2026-07-28 09:00:00',
   },
 ];
-
 
 
