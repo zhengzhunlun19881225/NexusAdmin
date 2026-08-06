@@ -126,12 +126,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     return 'roles';
   }, [subPath]);
 
-  const handleTabChange = (tab: 'roles' | 'users' | 'logs' | 'api') => {
-    if (setActivePath) {
-      setActivePath(`/settings/${tab}`);
-    }
-  };
-
   // Common Search & Filters
   const [keyword, setKeyword] = useState('');
   const [moduleFilter, setModuleFilter] = useState('all');
@@ -730,71 +724,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         </div>
       </div>
 
-      {/* Navigation Pills Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-gray-200/80 pb-4 dark:border-gray-800">
-        <div className="flex items-center rounded-xl bg-gray-100 p-1.5 dark:bg-gray-800/80">
-          <button
-            onClick={() => handleTabChange('roles')}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all ${
-              currentTab === 'roles'
-                ? 'bg-white text-indigo-600 shadow-xs dark:bg-gray-900 dark:text-indigo-400'
-                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
-            }`}
-          >
-            <ShieldCheck className="h-4 w-4" />
-            <span>角色权限 RBAC</span>
-            <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-extrabold text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-300">
-              {roles.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => handleTabChange('users')}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all ${
-              currentTab === 'users'
-                ? 'bg-white text-indigo-600 shadow-xs dark:bg-gray-900 dark:text-indigo-400'
-                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
-            }`}
-          >
-            <UserCheck className="h-4 w-4" />
-            <span>管理员账号</span>
-            <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-extrabold text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-300">
-              {systemUsers.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => handleTabChange('logs')}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all ${
-              currentTab === 'logs'
-                ? 'bg-white text-amber-600 shadow-xs dark:bg-gray-900 dark:text-amber-400'
-                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
-            }`}
-          >
-            <FileText className="h-4 w-4" />
-            <span>审计操作日志</span>
-            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-extrabold text-amber-700 dark:bg-amber-950/80 dark:text-amber-300">
-              {auditLogs.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => handleTabChange('api')}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all ${
-              currentTab === 'api'
-                ? 'bg-white text-emerald-600 shadow-xs dark:bg-gray-900 dark:text-emerald-400'
-                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
-            }`}
-          >
-            <KeyRound className="h-4 w-4" />
-            <span>开放 API 秘钥</span>
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-extrabold text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300">
-              {apiKeys.length}
-            </span>
-          </button>
-        </div>
-
-        {/* Search Bar inside controls */}
+      {/* Search Bar inside controls */}
+      <div className="flex justify-end border-b border-gray-200/80 pb-4 dark:border-gray-800">
         <div className="relative w-full sm:w-72">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
           <input
