@@ -1,0 +1,6 @@
+{
+  "name": "通用后台管理系统",
+  "description": "具有人性化交互的高级后台管理系统，包含顶部Logo/用户/设置、可折叠侧边栏、固定5项+多余折叠的高级筛选栏、灵活表格及详情展示。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
