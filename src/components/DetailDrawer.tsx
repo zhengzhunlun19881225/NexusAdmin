@@ -75,7 +75,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
         </div>
 
         {/* Status Quick Action Header Bar */}
-        <div className="bg-indigo-50/60 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900 px-5 py-3 flex items-center justify-between text-xs">
+        <div className="bg-indigo-50/60 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900 px-5 py-3 flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
             <span className="text-indigo-700 dark:text-indigo-300 font-medium">当前状态:</span>
             <span className="font-bold text-indigo-900 dark:text-indigo-100 uppercase">
@@ -100,7 +100,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
         </div>
 
         {/* Navigation Tabs inside Drawer */}
-        <div className="flex border-b border-gray-100 dark:border-gray-800 px-5 text-xs font-medium text-gray-500">
+        <div className="flex border-b border-gray-100 dark:border-gray-800 px-5 text-sm font-medium text-gray-500">
           <button
             onClick={() => setActiveTab('info')}
             className={`py-3 px-4 border-b-2 transition-colors ${
@@ -139,37 +139,37 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
             <>
               {/* Customer Info Box */}
               <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 p-4">
-                <h4 className="text-xs font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-1.5">
+                <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-1.5">
                   <User className="h-4 w-4 text-indigo-500" />
                   订购客户联系信息
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-xs">
+                <div className="grid grid-cols-2 gap-3 text-sm">
                   <div>
-                    <span className="text-gray-400">客户姓名:</span>
+                    <span className="text-xs text-gray-400">客户姓名:</span>
                     <p className="font-semibold text-gray-800 dark:text-gray-200 mt-0.5">
                       {order.customerName}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-400">联系电话:</span>
+                    <span className="text-xs text-gray-400">联系电话:</span>
                     <p className="font-mono text-gray-800 dark:text-gray-200 mt-0.5">
                       {order.customerPhone}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-400">电子邮箱:</span>
+                    <span className="text-xs text-gray-400">电子邮箱:</span>
                     <p className="font-mono text-gray-800 dark:text-gray-200 mt-0.5 truncate">
                       {order.customerEmail}
                     </p>
                   </div>
                   <div>
-                    <span className="text-gray-400">负责人员:</span>
+                    <span className="text-xs text-gray-400">负责人员:</span>
                     <p className="font-semibold text-gray-800 dark:text-gray-200 mt-0.5">
                       {order.assignee.name}
                     </p>
                   </div>
                   <div className="col-span-2">
-                    <span className="text-gray-400">配送收货地址:</span>
+                    <span className="text-xs text-gray-400">配送收货地址:</span>
                     <p className="text-gray-800 dark:text-gray-200 mt-0.5">
                       {order.deliveryAddress}
                     </p>
@@ -179,7 +179,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
 
               {/* Product Items Table */}
               <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 p-4">
-                <h4 className="text-xs font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-1.5">
+                <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-1.5">
                   <Package className="h-4 w-4 text-indigo-500" />
                   购入商品清单
                 </h4>
@@ -188,7 +188,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
                   {order.products.map((p, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between rounded-xl bg-white dark:bg-gray-900 p-3 border border-gray-100 dark:border-gray-800 text-xs"
+                      className="flex items-center justify-between rounded-xl bg-white dark:bg-gray-900 p-3 border border-gray-100 dark:border-gray-800 text-sm"
                     >
                       <div>
                         <div className="font-semibold text-gray-900 dark:text-white">
@@ -208,7 +208,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
                   ))}
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 flex justify-between text-xs">
+                <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 flex justify-between text-sm">
                   <span className="font-bold text-gray-700 dark:text-gray-300">订单结算金额</span>
                   <span className="text-base font-extrabold text-indigo-600 dark:text-indigo-400">
                     ￥{order.totalAmount.toLocaleString()}
@@ -218,7 +218,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
 
               {/* Note / Memo */}
               {order.notes && (
-                <div className="rounded-2xl border border-amber-200/60 bg-amber-50/50 dark:bg-amber-950/30 p-4 text-xs">
+                <div className="rounded-2xl border border-amber-200/60 bg-amber-50/50 dark:bg-amber-950/30 p-4 text-sm">
                   <h5 className="font-bold text-amber-800 dark:text-amber-300 mb-1">
                     客服人工备注 memo
                   </h5>
@@ -231,25 +231,25 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
           )}
 
           {activeTab === 'timeline' && (
-            <div className="space-y-4 pl-4 border-l-2 border-indigo-200 dark:border-indigo-900 text-xs my-2">
+            <div className="space-y-4 pl-4 border-l-2 border-indigo-200 dark:border-indigo-900 text-sm my-2">
               <div className="relative">
                 <span className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-indigo-600 ring-4 ring-indigo-100 dark:ring-indigo-950"></span>
                 <p className="font-bold text-gray-900 dark:text-white">订单创建成功</p>
                 <p className="text-gray-400 text-xs">{order.createdAt}</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">系统已完成安全拦截与风险评分检测。</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">系统已完成安全拦截与风险评分检测。</p>
               </div>
 
               <div className="relative pt-3">
                 <span className="absolute -left-[21px] top-4 h-3 w-3 rounded-full bg-blue-500"></span>
                 <p className="font-bold text-gray-900 dark:text-white">对公资金确认入账</p>
                 <p className="text-gray-400 text-xs">2026-07-28 09:20:00</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">财务核实无误，状态变更。</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">财务核实无误，状态变更。</p>
               </div>
             </div>
           )}
 
           {activeTab === 'logs' && (
-            <div className="space-y-2 text-xs font-mono">
+            <div className="space-y-2 text-sm font-mono">
               <div className="rounded-xl bg-gray-50 dark:bg-gray-800 p-2.5">
                 <span className="text-indigo-600 font-bold">[2026-07-28 09:14]</span> 用户提交订单，IP: 183.14.92.11
               </div>

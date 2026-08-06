@@ -533,9 +533,9 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
             </div>
 
             {/* Core Info */}
-            <div className="space-y-4 text-xs">
+            <div className="space-y-4 text-sm">
               <div className="rounded-xl bg-indigo-50 p-4 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 space-y-2">
-                <span className="font-semibold text-indigo-900 dark:text-indigo-200">
+                <span className="text-xs font-semibold text-indigo-900 dark:text-indigo-200">
                   判断筛选条件
                 </span>
                 <p className="font-mono text-sm text-indigo-950 dark:text-indigo-100 leading-relaxed">
@@ -545,13 +545,13 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl border border-gray-200 p-3 dark:border-gray-800">
-                  <span className="text-gray-400">目前精准覆盖人群</span>
+                  <span className="text-xs text-gray-400">目前精准覆盖人群</span>
                   <p className="text-xl font-bold text-gray-900 dark:text-gray-100 mt-1">
                     {detailSegment.memberCount} 人
                   </p>
                 </div>
                 <div className="rounded-xl border border-gray-200 p-3 dark:border-gray-800">
-                  <span className="text-gray-400">复购率分析</span>
+                  <span className="text-xs text-gray-400">复购率分析</span>
                   <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
                     {detailSegment.repurchaseRate}%
                   </p>

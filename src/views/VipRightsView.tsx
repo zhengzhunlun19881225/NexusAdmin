@@ -492,16 +492,16 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
             </div>
 
             {/* Core Metrics */}
-            <div className="grid grid-cols-2 gap-3 text-xs">
+            <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3.5 dark:border-amber-900/50 dark:bg-amber-950/30">
-                <span className="text-amber-700 dark:text-amber-400 font-medium">晋升门槛</span>
+                <span className="text-xs text-amber-700 dark:text-amber-400 font-medium">晋升门槛</span>
                 <p className="mt-1 text-xl font-bold text-amber-950 dark:text-amber-100">
                   ￥{detailTier.minSpent.toLocaleString()}
                 </p>
               </div>
 
               <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-3.5 dark:border-indigo-900/50 dark:bg-indigo-950/30">
-                <span className="text-indigo-700 dark:text-indigo-400 font-medium">折上折特权</span>
+                <span className="text-xs text-indigo-700 dark:text-indigo-400 font-medium">折上折特权</span>
                 <p className="mt-1 text-xl font-bold text-indigo-950 dark:text-indigo-100">
                   {detailTier.discountRate < 100 ? `${detailTier.discountRate / 10}折` : '标准原价'}
                 </p>
@@ -510,7 +510,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
 
             {/* Privileges Checklist */}
             <div className="space-y-3">
-              <span className="text-xs font-bold text-gray-900 dark:text-gray-100 flex items-center gap-1.5">
+              <span className="text-sm font-bold text-gray-900 dark:text-gray-100 flex items-center gap-1.5">
                 <Crown className="h-4 w-4 text-amber-500" />
                 <span>该等级专享特权清单 ({detailTier.rightsList.length}项)</span>
               </span>
@@ -519,7 +519,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                 {detailTier.rightsList.map((r, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 rounded-xl border border-gray-200/80 bg-gray-50/50 p-3 text-xs text-gray-800 dark:border-gray-800 dark:bg-gray-800/40 dark:text-gray-200"
+                    className="flex items-center gap-3 rounded-xl border border-gray-200/80 bg-gray-50/50 p-3 text-sm text-gray-800 dark:border-gray-800 dark:bg-gray-800/40 dark:text-gray-200"
                   >
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
                     <span className="font-medium">{r}</span>
@@ -530,7 +530,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
 
             {/* Eligible Customers Sample */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-gray-900 dark:text-gray-100 flex items-center justify-between">
+              <span className="text-sm font-bold text-gray-900 dark:text-gray-100 flex items-center justify-between">
                 <span>该等级会员代表 (示例)</span>
                 <span className="text-gray-400 font-normal">共 {detailTier.memberCount} 人</span>
               </span>
@@ -542,7 +542,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                   </p>
                 ) : (
                   matchedCustomersForTier.map((c) => (
-                    <div key={c.id} className="flex items-center justify-between p-3 text-xs">
+                    <div key={c.id} className="flex items-center justify-between p-3 text-sm">
                       <div className="flex items-center gap-2.5">
                         <img
                           src={c.avatar}

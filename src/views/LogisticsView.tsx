@@ -998,7 +998,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6 text-xs">
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 text-sm">
               {/* Courier & Recipient card */}
               <div className="rounded-xl bg-gray-50 dark:bg-gray-800/60 p-4 border border-gray-200/60 dark:border-gray-700/60 space-y-2.5">
                 <div className="flex justify-between items-start">
@@ -1021,8 +1021,8 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                 </div>
 
                 {detailItem.courierName && (
-                  <div className="pt-2 border-t border-gray-200/60 dark:border-gray-700/60 flex items-center justify-between text-xs">
-                    <span className="text-gray-500">末端派送员: <strong className="text-gray-800 dark:text-gray-200">{detailItem.courierName}</strong></span>
+                  <div className="pt-2 border-t border-gray-200/60 dark:border-gray-700/60 flex items-center justify-between text-sm">
+                    <span className="text-xs text-gray-500">末端派送员: <strong className="text-sm text-gray-800 dark:text-gray-200">{detailItem.courierName}</strong></span>
                     <a
                       href={`tel:${detailItem.courierPhone}`}
                       className="inline-flex items-center gap-1 text-sky-600 font-semibold hover:underline"
@@ -1036,7 +1036,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
 
               {/* Simulated Map Visual */}
               <div className="rounded-xl bg-gradient-to-r from-sky-50 to-indigo-50 dark:from-sky-950/40 dark:to-indigo-950/40 p-4 border border-sky-100 dark:border-sky-900/40 space-y-2">
-                <div className="flex justify-between items-center text-xs">
+                <div className="flex justify-between items-center text-sm">
                   <span className="font-semibold text-sky-900 dark:text-sky-200 flex items-center gap-1">
                     <Navigation className="h-3.5 w-3.5 text-sky-600" />
                     全程轨迹链路路线
@@ -1045,7 +1045,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                 </div>
                 <div className="flex items-center justify-between px-2 py-3 bg-white/80 dark:bg-gray-900/80 rounded-lg shadow-xs">
                   <div className="text-center">
-                    <div className="text-xs font-bold text-gray-800 dark:text-gray-200">发货仓</div>
+                    <div className="text-sm font-bold text-gray-800 dark:text-gray-200">发货仓</div>
                     <div className="text-xs text-gray-400">华东总库</div>
                   </div>
                   <div className="flex-1 px-4 flex items-center justify-center">
@@ -1054,7 +1054,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xs font-bold text-gray-800 dark:text-gray-200">目的地</div>
+                    <div className="text-sm font-bold text-gray-800 dark:text-gray-200">目的地</div>
                     <div className="text-xs text-gray-400">客户收货地</div>
                   </div>
                 </div>
@@ -1063,7 +1063,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
               {/* Timeline list */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-gray-900 dark:text-white text-xs">
+                  <h4 className="font-bold text-gray-900 dark:text-white text-sm">
                     包裹动向日志 ({detailItem.tracks.length} 个节点)
                   </h4>
                   <button
@@ -1090,7 +1090,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
                           <span
-                            className={`font-semibold text-xs ${
+                            className={`font-semibold text-sm ${
                               idx === 0 ? 'text-sky-600 dark:text-sky-400' : 'text-gray-700 dark:text-gray-300'
                             }`}
                           >
@@ -1114,7 +1114,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
             </div>
 
             {/* Footer */}
-            <div className="border-t border-gray-100 dark:border-gray-800 p-4 bg-gray-50/50 dark:bg-gray-900/50 flex justify-between items-center text-xs">
+            <div className="border-t border-gray-100 dark:border-gray-800 p-4 bg-gray-50/50 dark:bg-gray-900/50 flex justify-between items-center text-sm">
               <button
                 onClick={() => handleOpenEdit(detailItem)}
                 className="text-gray-600 hover:text-sky-600 font-medium"

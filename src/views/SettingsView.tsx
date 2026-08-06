@@ -1312,7 +1312,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             </p>
 
             <div className="space-y-3">
-              <span className="text-xs font-bold text-gray-900 dark:text-gray-100 flex items-center gap-1.5">
+              <span className="text-sm font-bold text-gray-900 dark:text-gray-100 flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 <span>该角色已生效权限清单 ({detailRole.permissions.length} 项)</span>
               </span>
@@ -1321,7 +1321,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 {detailRole.permissions.map((p) => (
                   <div
                     key={p}
-                    className="flex items-center justify-between rounded-xl border border-gray-200/80 bg-gray-50/50 p-2.5 text-xs dark:border-gray-800 dark:bg-gray-800/40"
+                    className="flex items-center justify-between rounded-xl border border-gray-200/80 bg-gray-50/50 p-2.5 text-sm dark:border-gray-800 dark:bg-gray-800/40"
                   >
                     <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">
                       {p}
@@ -1668,34 +1668,34 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </button>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-sm">
               <div className="rounded-xl border border-gray-200/80 bg-gray-50/50 p-3.5 space-y-2 dark:border-gray-800 dark:bg-gray-800/40">
                 <div className="flex justify-between">
-                  <span className="text-gray-400">分配角色:</span>
+                  <span className="text-xs text-gray-400">分配角色:</span>
                   <span className="font-bold text-indigo-600 dark:text-indigo-400">
                     {detailUser.role}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">所属部门:</span>
+                  <span className="text-xs text-gray-400">所属部门:</span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">
                     {detailUser.department}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">联系电话:</span>
+                  <span className="text-xs text-gray-400">联系电话:</span>
                   <span className="font-mono text-gray-800 dark:text-gray-200">
                     {detailUser.phone}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">企业邮箱:</span>
+                  <span className="text-xs text-gray-400">企业邮箱:</span>
                   <span className="font-mono text-gray-800 dark:text-gray-200">
                     {detailUser.email}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">最近登录:</span>
+                  <span className="text-xs text-gray-400">最近登录:</span>
                   <span className="font-mono text-gray-800 dark:text-gray-200">
                     {detailUser.lastLogin}
                   </span>
@@ -1882,29 +1882,29 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </button>
             </div>
 
-            <div className="space-y-3 text-xs font-mono">
+            <div className="space-y-3 text-sm font-mono">
               <div className="rounded-xl border border-gray-200/80 bg-gray-50/50 p-3.5 space-y-2 dark:border-gray-800 dark:bg-gray-800/40">
                 <div className="flex justify-between">
-                  <span className="text-gray-400 font-sans">操作员:</span>
+                  <span className="text-xs text-gray-400 font-sans">操作员:</span>
                   <span className="font-bold text-gray-900 dark:text-white">{detailLog.operator}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 font-sans">客户端 IP:</span>
+                  <span className="text-xs text-gray-400 font-sans">客户端 IP:</span>
                   <span className="text-gray-800 dark:text-gray-200">{detailLog.ip}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 font-sans">业务模块:</span>
+                  <span className="text-xs text-gray-400 font-sans">业务模块:</span>
                   <span className="text-gray-800 dark:text-gray-200">{detailLog.module}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 font-sans">触发动作:</span>
+                  <span className="text-xs text-gray-400 font-sans">触发动作:</span>
                   <span className="text-amber-600 font-bold dark:text-amber-400">
                     {detailLog.action}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400 font-sans">时间戳:</span>
-                  <span className="text-gray-500">{detailLog.timestamp}</span>
+                  <span className="text-xs text-gray-400 font-sans">时间戳:</span>
+                  <span className="text-xs text-gray-500">{detailLog.timestamp}</span>
                 </div>
               </div>
 

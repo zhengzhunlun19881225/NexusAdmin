@@ -661,24 +661,24 @@ export const CustomerDirectoryView: React.FC<CustomerDirectoryViewProps> = ({
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-400">联系电话:</span>
-                  <span className="font-mono text-xs font-medium">{detailCustomer.phone}</span>
+                  <span className="font-mono text-sm font-medium">{detailCustomer.phone}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-400">电子邮箱:</span>
-                  <span className="font-mono text-xs font-medium">{detailCustomer.email}</span>
+                  <span className="font-mono text-sm font-medium">{detailCustomer.email}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-400">所属公司:</span>
-                  <span className="font-medium text-xs">
+                  <span className="font-medium text-sm">
                     {detailCustomer.company || '个人散客'}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-400">最近下单时间:</span>
-                  <span className="text-xs font-medium">{detailCustomer.lastOrderDate}</span>
+                  <span className="text-sm font-medium">{detailCustomer.lastOrderDate}</span>
                 </div>
               </div>
 

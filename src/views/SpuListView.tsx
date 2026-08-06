@@ -598,13 +598,13 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white">
                     {detailItem.name}
                   </h4>
-                  <p className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
+                  <p className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
                     品牌：{detailItem.brand}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     分类：{detailItem.categoryName}
                   </p>
-                  <p className="text-xs font-mono font-semibold text-gray-900 dark:text-gray-100">
+                  <p className="text-sm font-mono font-semibold text-gray-900 dark:text-gray-100">
                     价格区间：¥{detailItem.minPrice.toLocaleString()} ~ ¥{detailItem.maxPrice.toLocaleString()}
                   </p>
                 </div>
@@ -612,7 +612,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
 
               {/* Specs tags */}
               <div className="space-y-2">
-                <span className="text-xs font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+                <span className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                   <Tag className="h-3.5 w-3.5 text-indigo-500" />
                   通用规格属性标签
                 </span>
@@ -630,7 +630,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
 
               {/* Description */}
               <div className="space-y-2">
-                <span className="text-xs font-bold text-gray-900 dark:text-white">
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
                   商品描述信息
                 </span>
                 <div className="rounded-xl bg-gray-50 dark:bg-gray-800/50 p-3 text-xs text-gray-600 dark:text-gray-300 leading-relaxed border border-gray-200/60 dark:border-gray-800">
@@ -641,7 +641,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
               {/* SKU List */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                     <Layers className="h-3.5 w-3.5 text-indigo-500" />
                     关联 SKU 变体 (共 {detailItem.skus?.length || 0} 项)
                   </span>

@@ -933,21 +933,21 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
             </div>
 
             {/* Drawer Content */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-5 text-xs">
+            <div className="flex-1 overflow-y-auto p-6 space-y-5 text-sm">
               {/* Status Box */}
               <div className="rounded-xl bg-gray-50 dark:bg-gray-800/60 p-4 border border-gray-200/60 dark:border-gray-700/60 space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">当前工单状态:</span>
+                  <span className="text-xs text-gray-500">当前工单状态:</span>
                   {renderStatusBadge(detailItem.status)}
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">处理负责人:</span>
+                  <span className="text-xs text-gray-500">处理负责人:</span>
                   <span className="font-semibold text-gray-800 dark:text-gray-200">{detailItem.handler || '未指定'}</span>
                 </div>
                 {detailItem.auditTime && (
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-500">最近审核时间:</span>
-                    <span className="text-gray-700 dark:text-gray-300">{detailItem.auditTime}</span>
+                    <span className="text-xs text-gray-500">最近审核时间:</span>
+                    <span className="text-xs text-gray-700 dark:text-gray-300">{detailItem.auditTime}</span>
                   </div>
                 )}
               </div>
@@ -964,7 +964,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                   </div>
                   <div className="rounded-xl bg-indigo-50/50 dark:bg-indigo-950/20 p-3 border border-indigo-100 dark:border-indigo-900/30">
                     <span className="text-gray-500 block text-xs">关联原订单</span>
-                    <span className="text-xs font-mono font-bold text-indigo-700 dark:text-indigo-300">{detailItem.orderNo}</span>
+                    <span className="text-sm font-mono font-bold text-indigo-700 dark:text-indigo-300">{detailItem.orderNo}</span>
                   </div>
                 </div>
               </div>
@@ -999,7 +999,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                 </h4>
                 <div className="rounded-xl bg-gray-50 dark:bg-gray-800/50 p-3 text-gray-800 dark:text-gray-200 leading-relaxed">
                   <p className="font-semibold text-indigo-600 dark:text-indigo-400 mb-1">{detailItem.reason}</p>
-                  <p className="text-gray-600 dark:text-gray-300">{detailItem.description || '无补充说明'}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">{detailItem.description || '无补充说明'}</p>
                 </div>
               </div>
 
