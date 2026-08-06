@@ -231,7 +231,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <div className="flex items-center gap-1.5 shrink-0">
                     {item.badge && (
                       <span
-                        className={`rounded-full px-1.5 py-0.5 text-xs font-bold text-white ${
+                        className={`menu-badge rounded-full px-1.5 py-0.5 text-xs font-bold text-white ${
                           item.badgeColor || 'bg-indigo-500'
                         }`}
                       >
@@ -274,7 +274,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         </div>
                         {child.badge && (
                           <span
-                            className={`rounded-full px-1.5 py-0.2 text-xs font-semibold ${
+                            className={`menu-badge rounded-full px-1.5 py-0.2 text-xs font-semibold ${
                               isSubActive
                                 ? 'bg-white/20 text-white'
                                 : 'bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300'
