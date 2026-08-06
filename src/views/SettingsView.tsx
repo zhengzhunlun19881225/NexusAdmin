@@ -624,10 +624,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
         <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-semibold text-indigo-300 backdrop-blur-md border border-indigo-500/30">
-              <ShieldCheck className="h-3.5 w-3.5 text-indigo-400" />
-              <span>系统与权限配置中心 (RBAC & Audit & Open API)</span>
-            </div>
             <h2 className="text-2xl font-bold tracking-tight text-white">
               细粒度 RBAC 权限体系、安全审计与 Open API 平台
             </h2>
