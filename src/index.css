@@ -167,4 +167,13 @@
   .dark textarea {
     color-scheme: dark;
   }
+
+  input,
+  select,
+  textarea,
+  button,
+  button :where(span, p, div) {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
 }
