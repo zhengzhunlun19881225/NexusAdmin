@@ -310,88 +310,110 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Top Banner */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/10 blur-xl pointer-events-none" />
-        <div className="relative z-10 space-y-1">
-          <div className="flex items-center gap-2">
-            <Truck className="h-6 w-6 text-indigo-200" />
-            <h2 className="text-xl font-bold tracking-tight">物流追踪与发货中心</h2>
-          </div>
-          <p className="text-xs text-indigo-100 max-w-2xl">
-            对接全网运力（顺丰、京东、三通一达、DHL），实现包裹签发、实时全程轨道追踪节点追加与异常告警打标。
-          </p>
-        </div>
-
-        <div className="relative z-10 flex items-center gap-3">
-          <button
-            onClick={() => showToast('全网物流运力API接口数据同步成功', 'success')}
-            className="flex items-center gap-1.5 rounded-xl bg-white/15 px-3.5 py-2 text-xs font-semibold text-white hover:bg-white/25 transition-all backdrop-blur-md border border-white/20"
-          >
-            <RefreshCw className="h-3.5 w-3.5" />
-            <span>刷起轨迹</span>
-          </button>
-          <button
-            onClick={handleOpenCreate}
-            className="flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-indigo-800 shadow-lg hover:bg-indigo-50 transition-all"
-            id="create-shipment-ticket-btn"
-          >
-            <Plus className="h-4 w-4 text-indigo-600" />
-            <span>新建发货单</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm flex items-center justify-between">
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">包裹运单总数</p>
-            <h3 className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{stats.total} <span className="text-xs font-normal text-gray-400">件</span></h3>
+            <div className="flex items-center gap-2">
+              <Truck className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                物流追踪与发货
+              </h2>
+            </div>
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+              对接全网运力（顺丰、京东、三通一达、DHL），实现包裹签发、实时全程轨道追踪节点追加与异常告警打标。
+            </p>
           </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600">
-            <Package className="h-5 w-5" />
+
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              onClick={() => showToast('全网物流运力API接口数据同步成功', 'success')}
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span>刷新轨迹</span>
+            </button>
+            <button
+              onClick={handleOpenCreate}
+              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              id="create-shipment-ticket-btn"
+            >
+              <Plus className="h-4 w-4" />
+              <span>新建发货单</span>
+            </button>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-sky-200/80 dark:border-sky-900/50 bg-sky-50/40 dark:bg-sky-950/20 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-sky-700 dark:text-sky-300">长途干线运输中</p>
-            <h3 className="mt-1 text-2xl font-bold text-sky-900 dark:text-sky-200">{stats.inTransit} <span className="text-xs font-normal text-sky-600">件</span></h3>
-          </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-100 dark:bg-sky-900/50 text-sky-600">
-            <Truck className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-amber-200/80 dark:border-amber-900/50 bg-amber-50/40 dark:bg-amber-950/20 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-amber-700 dark:text-amber-300">末端快递派送中</p>
-            <h3 className="mt-1 text-2xl font-bold text-amber-900 dark:text-amber-200">{stats.delivering} <span className="text-xs font-normal text-amber-600">件</span></h3>
-          </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600">
-            <Send className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-emerald-200/80 dark:border-emerald-900/50 bg-emerald-50/40 dark:bg-emerald-950/20 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-emerald-700 dark:text-emerald-300">客户已成功签收</p>
-            <h3 className="mt-1 text-2xl font-bold text-emerald-900 dark:text-emerald-200">{stats.signed} <span className="text-xs font-normal text-emerald-600">件</span></h3>
-          </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600">
-            <CheckCircle2 className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-rose-200/80 dark:border-rose-900/50 bg-rose-50/40 dark:bg-rose-950/20 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-rose-700 dark:text-rose-300">物流滞留/拦截异常</p>
-            <h3 className="mt-1 text-2xl font-bold text-rose-900 dark:text-rose-200">{stats.exception} <span className="text-xs font-normal text-rose-600">件</span></h3>
-          </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-100 dark:bg-rose-900/50 text-rose-600">
-            <ShieldAlert className="h-5 w-5" />
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            {
+              label: '包裹运单总数',
+              value: stats.total,
+              unit: '件',
+              helper: '全网物流单',
+              icon: Package,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: '干线运输中',
+              value: stats.inTransit,
+              unit: '件',
+              helper: '跨仓干线流转',
+              icon: Truck,
+              iconClassName: 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-sky-600 dark:text-sky-400',
+            },
+            {
+              label: '末端派送中',
+              value: stats.delivering,
+              unit: '件',
+              helper: '即将送达客户',
+              icon: Send,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+            {
+              label: '客户已签收',
+              value: stats.signed,
+              unit: '件',
+              helper: '签收闭环完成',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+            {
+              label: '物流异常',
+              value: stats.exception,
+              unit: '件',
+              helper: '滞留或拦截',
+              icon: ShieldAlert,
+              iconClassName: 'bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400',
+              valueClassName: 'text-rose-600 dark:text-rose-400',
+              helperClassName: 'text-rose-600 dark:text-rose-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

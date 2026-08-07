@@ -239,21 +239,17 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Top Hero Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl">
-        <div className="absolute -right-10 -bottom-10 opacity-15">
-          <Warehouse className="h-64 w-64 text-white" />
-        </div>
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-md border border-white/20">
-              <ShieldAlert className="h-3.5 w-3.5 text-indigo-200" />
-              <span>多仓动态库存熔断与监控</span>
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <Warehouse className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h1 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                库存预警中心
+              </h1>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white">
-              多仓库存预警与自动化补货采购中心
-            </h1>
-            <p className="max-w-2xl text-xs text-indigo-100/80 leading-relaxed">
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
               实时监测华东总仓、华南仓及全国节点的实际物理库存。当低于安全水位阈值时自动触发熔断预警，并按日销模型一键生成采购补货任务单。
             </p>
           </div>
@@ -261,10 +257,10 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleBatchPurchaseOrder}
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs font-bold text-indigo-800 shadow-lg hover:bg-indigo-50 transition-all active:scale-95"
+              className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
             >
-              <FileSpreadsheet className="h-4 w-4 text-indigo-600" />
-              <span>一键生成补货采购单</span>
+              <FileSpreadsheet className="h-4 w-4" />
+              <span>生成补货采购单</span>
             </button>
 
             <button
@@ -286,7 +282,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                 });
                 setIsCreating(true);
               }}
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-black/20 hover:bg-black/30 backdrop-blur-md border border-white/20 px-3.5 py-2.5 text-xs font-medium text-white transition-all"
+              className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
             >
               <Plus className="h-4 w-4" />
               <span>添加库存监控</span>
@@ -294,47 +290,66 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
           </div>
         </div>
 
-        {/* Stat Cards */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/10">
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-rose-200 flex items-center justify-between">
-              <span>严重缺货 (断货)</span>
-              <AlertCircle className="h-3.5 w-3.5 text-rose-300" />
-            </div>
-            <div className="text-xl font-bold text-rose-300 mt-0.5">
-              {stats.criticalCount} <span className="text-xs font-normal opacity-80">项</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-amber-200 flex items-center justify-between">
-              <span>安全线告警</span>
-              <AlertTriangle className="h-3.5 w-3.5 text-amber-300" />
-            </div>
-            <div className="text-xl font-bold text-amber-300 mt-0.5">
-              {stats.warningCount} <span className="text-xs font-normal opacity-80">项</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-sky-200 flex items-center justify-between">
-              <span>库存滞销积压</span>
-              <TrendingUp className="h-3.5 w-3.5 text-sky-300" />
-            </div>
-            <div className="text-xl font-bold text-sky-300 mt-0.5">
-              {stats.overstockCount} <span className="text-xs font-normal opacity-80">项</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-emerald-200 flex items-center justify-between">
-              <span>正常健康库存</span>
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" />
-            </div>
-            <div className="text-xl font-bold text-emerald-300 mt-0.5">
-              {stats.normalCount} <span className="text-xs font-normal opacity-80">项</span>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: '严重缺货',
+              value: stats.criticalCount,
+              unit: '项',
+              helper: '断货风险最高',
+              icon: AlertCircle,
+              iconClassName: 'bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400',
+              valueClassName: 'text-rose-600 dark:text-rose-400',
+              helperClassName: 'text-rose-600 dark:text-rose-400',
+            },
+            {
+              label: '安全线告警',
+              value: stats.warningCount,
+              unit: '项',
+              helper: '需补货评估',
+              icon: AlertTriangle,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+            {
+              label: '库存滞销积压',
+              value: stats.overstockCount,
+              unit: '项',
+              helper: '需促销或调拨',
+              icon: TrendingUp,
+              iconClassName: 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-sky-600 dark:text-sky-400',
+            },
+            {
+              label: '正常健康库存',
+              value: stats.normalCount,
+              unit: '项',
+              helper: '库存水位稳定',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

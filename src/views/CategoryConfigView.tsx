@@ -445,48 +445,80 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Top Banner Hero */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl">
-        <div className="absolute -right-10 -bottom-10 opacity-15">
-          <FolderTree className="h-64 w-64 text-white" />
-        </div>
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-md border border-white/20">
-              <FolderTree className="h-3.5 w-3.5 text-indigo-200" />
-              <span>多级分类树体系</span>
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <FolderTree className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h1 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                多级类目配置
+              </h1>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white">
-              商品多级类目配置与佣金扣率管理
-            </h1>
-            <p className="max-w-2xl text-xs text-indigo-100/80 leading-relaxed">
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
               支持三级商品分类嵌套树（一级大类 / 二级中类 / 三级细节品类），灵活设置平台交易佣金扣率、发票增殖税率与全路径层级节点。
             </p>
           </div>
 
           <button
             onClick={openAddTopModal}
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs font-semibold text-indigo-800 shadow-lg hover:bg-indigo-50 transition-all active:scale-95"
+            className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
           >
-            <Plus className="h-4 w-4 text-indigo-600" />
+            <Plus className="h-4 w-4" />
             <span>添加一级大类目</span>
           </button>
         </div>
 
-        {/* Quick Stats Banner */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-white/10">
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-indigo-200">类目总节点数</div>
-            <div className="text-lg font-bold text-white mt-0.5">{stats.totalCount} <span className="text-xs font-normal opacity-80">个</span></div>
-          </div>
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-emerald-200">生效启用中</div>
-            <div className="text-lg font-bold text-emerald-300 mt-0.5">{stats.enabledCount} <span className="text-xs font-normal opacity-80">个</span></div>
-          </div>
-          <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm border border-white/10">
-            <div className="text-xs text-indigo-200">全库挂载商品总数</div>
-            <div className="text-lg font-bold text-amber-300 mt-0.5">{stats.totalProducts.toLocaleString()} <span className="text-xs font-normal opacity-80">件</span></div>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {[
+            {
+              label: '类目总节点数',
+              value: stats.totalCount,
+              unit: '个',
+              helper: '全路径分类树',
+              icon: FolderTree,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: '生效启用中',
+              value: stats.enabledCount,
+              unit: '个',
+              helper: '可用于商品挂载',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+            {
+              label: '挂载商品总数',
+              value: stats.totalProducts.toLocaleString(),
+              unit: '件',
+              helper: '关联在线商品',
+              icon: Hash,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
