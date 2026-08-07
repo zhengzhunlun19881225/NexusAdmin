@@ -3,7 +3,6 @@ import {
   Award,
   Search,
   Plus,
-  Filter,
   RefreshCw,
   Eye,
   Edit2,
@@ -22,6 +21,7 @@ import {
   ChevronRight,
   PlusCircle,
   Tag,
+  Download,
 } from 'lucide-react';
 import { VipTierItem, CustomerItem } from '../types';
 import { statusBadge } from '../uiTheme';
@@ -308,16 +308,54 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
       </div>
 
       {/* Filter Bar */}
-      <div className="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="relative flex-1">
+      <div className="space-y-4 rounded-2xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-3 dark:border-gray-800/80">
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { id: 'all', label: '全部等级', count: stats.totalTiers },
+              { id: 'active', label: '启用中', count: stats.activeTiers },
+              { id: 'disabled', label: '已暂停', count: vipTiers.filter((t) => t.status === 'disabled').length },
+            ].map((st) => (
+              <button
+                key={st.id}
+                onClick={() => setSelectedStatus(st.id)}
+                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
+                  selectedStatus === st.id
+                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
+                }`}
+              >
+                <span>{st.label}</span>
+                <span
+                  className={`rounded-full px-1.5 text-xs font-bold ${
+                    selectedStatus === st.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                  }`}
+                >
+                  {st.count}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => showToast('已导出当前 VIP 权益体系配置 CSV', 'success')}
+            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            <Download className="h-3.5 w-3.5" />
+            <span>导出配置</span>
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative w-full sm:w-[400px]">
             <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
             <input
               type="text"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               placeholder="搜索等级名称、编码、包含的专属特权或说明..."
-              className="w-full rounded-xl border border-gray-200 bg-gray-50/80 py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 outline-none transition focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-amber-400 dark:focus:bg-gray-800"
+              className="w-full rounded-lg border border-gray-200 bg-gray-50/80 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400 dark:focus:bg-gray-800"
             />
             {keyword && (
               <button
@@ -329,20 +367,19 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
             )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <Filter className="h-3.5 w-3.5 text-gray-400" />
-              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">状态:</span>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="rounded-xl border border-gray-200 bg-gray-50 px-3 py-2 text-xs font-medium text-gray-700 outline-none focus:border-amber-500 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200"
+          <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:w-auto sm:justify-end">
+            {(keyword || selectedStatus !== 'all') && (
+              <button
+                onClick={() => {
+                  setKeyword('');
+                  setSelectedStatus('all');
+                }}
+                className="inline-flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
               >
-                <option value="all">全部状态</option>
-                <option value="active">启用中</option>
-                <option value="disabled">已暂停</option>
-              </select>
-            </div>
+                <RefreshCw className="h-3.5 w-3.5" />
+                <span>重置条件</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
