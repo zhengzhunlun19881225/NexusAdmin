@@ -617,26 +617,52 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     });
   }, [apiKeys, keyword, statusFilter]);
 
+  const headerMeta = {
+    roles: {
+      icon: ShieldCheck,
+      title: '角色权限 RBAC',
+      description: '配置细粒度角色权限、授权节点与数据视角范围，保障企业级全链路权限安全。',
+    },
+    users: {
+      icon: UserCheck,
+      title: '管理员账号',
+      description: '集中管理后台登录账号、角色绑定、账号状态与组织权限归属。',
+    },
+    logs: {
+      icon: FileText,
+      title: '审计操作日志',
+      description: '沉淀全量后台操作流水，支持行为追溯、结果筛查、导出归档与风险核验。',
+    },
+    api: {
+      icon: KeyRound,
+      title: '开放 API 秘钥',
+      description: '管理 Open API 授权秘钥、调用范围、访问状态与接口安全策略。',
+    },
+  }[currentTab];
+  const HeaderIcon = headerMeta.icon;
+
   return (
     <div className="space-y-6">
-      {/* Hero Banner (Same visual design as AbnormalRefundsView) */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl">
-        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          <div className="space-y-1.5">
-            <h2 className="text-2xl font-bold tracking-tight text-white">
-              细粒度 RBAC 权限体系、安全审计与 Open API 平台
-            </h2>
-            <p className="text-sm text-indigo-200/80">
-              保障企业级全链路权限安全，全量操作行为防篡改追溯与开放 API 授权管理
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <HeaderIcon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                {headerMeta.title}
+              </h2>
+            </div>
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+              {headerMeta.description}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
             {currentTab === 'roles' && (
               <button
                 onClick={handleOpenAddRole}
-                className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400 active:scale-95"
+                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
               >
                 <Plus className="h-4 w-4" />
                 <span>新增系统角色</span>
@@ -646,7 +672,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             {currentTab === 'users' && (
               <button
                 onClick={handleOpenAddUser}
-                className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400 active:scale-95"
+                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
               >
                 <UserPlus className="h-4 w-4" />
                 <span>新增管理员账号</span>
@@ -654,28 +680,28 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             )}
 
             {currentTab === 'logs' && (
-              <div className="flex items-center gap-2">
+              <>
                 <button
                   onClick={handleExportLogsCsv}
-                  className="inline-flex items-center gap-2 rounded-xl border border-indigo-500/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+                  className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
                 >
-                  <Download className="h-4 w-4 text-indigo-300" />
+                  <Download className="h-3.5 w-3.5" />
                   <span>导出日志 CSV</span>
                 </button>
                 <button
                   onClick={() => setIsAddLogModalOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400 active:scale-95"
+                  className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
                 >
                   <Plus className="h-4 w-4" />
                   <span>手动上报审计</span>
                 </button>
-              </div>
+              </>
             )}
 
             {currentTab === 'api' && (
               <button
                 onClick={handleOpenAddKey}
-                className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400 active:scale-95"
+                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
               >
                 <Key className="h-4 w-4" />
                 <span>创建 API 秘钥</span>
@@ -684,39 +710,66 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">系统管理员账号</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-indigo-300">{stats.totalUsers}</span>
-              <span className="text-xs text-emerald-400">{stats.activeUsers} 允许登录</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">RBAC 角色节点</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-white">{stats.totalRoles}</span>
-              <span className="text-xs text-indigo-300">个角色组</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">审计操作日志存量</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-amber-300">{stats.totalLogs}</span>
-              <span className="text-xs text-indigo-200/60">条流水</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">开放 API 秘钥</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-emerald-300">{stats.totalApiKeys}</span>
-              <span className="text-xs text-emerald-400">{stats.activeApiKeys} 生效中</span>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: '系统管理员账号',
+              value: stats.totalUsers,
+              unit: `${stats.activeUsers} 允许登录`,
+              helper: '后台账号总量',
+              icon: UserCheck,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: 'RBAC 角色节点',
+              value: stats.totalRoles,
+              unit: '个角色组',
+              helper: '细粒度授权模型',
+              icon: Shield,
+              iconClassName: 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-sky-600 dark:text-sky-400',
+            },
+            {
+              label: '审计操作日志存量',
+              value: stats.totalLogs,
+              unit: '条流水',
+              helper: '防篡改追溯记录',
+              icon: FileText,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+            {
+              label: '开放 API 秘钥',
+              value: stats.totalApiKeys,
+              unit: `${stats.activeApiKeys} 生效中`,
+              helper: 'Open API 授权',
+              icon: KeyRound,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
