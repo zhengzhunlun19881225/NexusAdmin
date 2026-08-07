@@ -307,84 +307,115 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      {/* Top Banner Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute -right-8 -bottom-8 h-40 w-40 rounded-full bg-white/10 blur-xl pointer-events-none" />
-        <div className="relative z-10 space-y-1">
-          <div className="flex items-center gap-2">
-            <ShieldAlert className="h-6 w-6 text-amber-200" />
-            <h2 className="text-xl font-bold tracking-tight">异常与退款管理中心</h2>
-          </div>
-          <p className="text-xs text-indigo-100 max-w-2xl">
-            实时处理售后争议、退货退款审核、物流异常与高风险交易拦截工单，支持全流程增删改查及一键审核流。
-          </p>
-        </div>
-
-        <div className="relative z-10 flex items-center gap-3">
-          <button
-            onClick={() => {
-              showToast('已完成全盘异常与退款数据同步刷新', 'success');
-            }}
-            className="flex items-center gap-1.5 rounded-xl bg-white/15 px-3.5 py-2 text-xs font-semibold text-white hover:bg-white/25 transition-all backdrop-blur-md border border-white/20"
-          >
-            <RefreshCw className="h-3.5 w-3.5" />
-            <span>刷新数据</span>
-          </button>
-          <button
-            onClick={handleOpenCreateModal}
-            className="flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-indigo-800 shadow-lg hover:bg-indigo-50 transition-all"
-            id="create-refund-ticket-btn"
-          >
-            <Plus className="h-4 w-4 text-indigo-600" />
-            <span>发起售后异常单</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm flex items-center justify-between">
+      {/* Header & Metrics */}
+      <div className="rounded-2xl border border-gray-100 bg-gradient-to-r from-slate-50 via-white to-indigo-50/70 p-5 shadow-sm dark:border-gray-800 dark:from-gray-950 dark:via-gray-950 dark:to-indigo-950/30">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">售后异常工单总量</p>
-            <h3 className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{stats.totalCount} <span className="text-xs font-normal text-gray-400">单</span></h3>
-            <p className="mt-0.5 text-xs text-gray-400">处理中 {stats.processingCount} 单</p>
+            <div className="text-xs font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              After-sales Risk Center
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              <ShieldAlert className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                异常与退款
+              </h2>
+            </div>
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+              实时处理售后争议、退货退款审核、物流异常与高风险交易拦截工单，支持全流程增删改查及一键审核流。
+            </p>
           </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
-            <FileText className="h-5 w-5" />
+
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              onClick={() => {
+                showToast('已完成全盘异常与退款数据同步刷新', 'success');
+              }}
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span>刷新数据</span>
+            </button>
+            <button
+              onClick={handleOpenCreateModal}
+              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              id="create-refund-ticket-btn"
+            >
+              <Plus className="h-4 w-4" />
+              <span>发起售后异常单</span>
+            </button>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-amber-200/80 dark:border-amber-900/50 bg-amber-50/40 dark:bg-amber-950/20 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-amber-700 dark:text-amber-400">待审核异常退款</p>
-            <h3 className="mt-1 text-2xl font-bold text-amber-900 dark:text-amber-200">{stats.pendingCount} <span className="text-xs font-normal text-amber-600 dark:text-amber-400">单待办</span></h3>
-            <p className="mt-0.5 text-xs text-amber-600/80 dark:text-amber-400/80">需客服或主管人工核销</p>
-          </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300">
-            <Clock className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">申请退款总金额</p>
-            <h3 className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">￥{stats.totalAmount.toLocaleString()}</h3>
-            <p className="mt-0.5 text-xs text-gray-400">涉及各类售后索赔</p>
-          </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400">
-            <DollarSign className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">已完成退款成功金额</p>
-            <h3 className="mt-1 text-2xl font-bold text-emerald-600 dark:text-emerald-400">￥{stats.completedAmount.toLocaleString()}</h3>
-            <p className="mt-0.5 text-xs text-emerald-600/80">原路退回买家原账户</p>
-          </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
-            <CheckCircle2 className="h-5 w-5" />
-          </div>
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            {
+              label: '售后异常工单',
+              value: stats.totalCount,
+              unit: '单',
+              helper: `处理中 ${stats.processingCount} 单`,
+              icon: FileText,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: '待审核退款',
+              value: stats.pendingCount,
+              unit: '单待办',
+              helper: '需人工核销',
+              icon: Clock,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+            {
+              label: '流程处理中',
+              value: stats.processingCount,
+              unit: '单',
+              helper: '物流与客服协同',
+              icon: Truck,
+              iconClassName: 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-sky-600 dark:text-sky-400',
+            },
+            {
+              label: '申请退款金额',
+              value: `￥${stats.totalAmount.toLocaleString()}`,
+              helper: '涉及售后索赔',
+              icon: DollarSign,
+              iconClassName: 'bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-rose-600 dark:text-rose-400',
+            },
+            {
+              label: '已完成退款',
+              value: `￥${stats.completedAmount.toLocaleString()}`,
+              helper: '原路退回账户',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    {'unit' in metric && metric.unit && (
+                      <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                    )}
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
