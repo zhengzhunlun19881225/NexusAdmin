@@ -354,65 +354,88 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
       </div>
 
       {/* Control & Filter Bar */}
-      <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-        {/* Search */}
-        <div className="relative flex-1 min-w-[240px]">
-          <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-gray-400" />
-          <input
-            type="text"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder="搜索 SKU 编码、商品名称、规格或供应商..."
-            className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 py-2 pl-10 pr-4 text-xs text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-500"
-          />
-          {keyword && (
-            <button
-              onClick={() => setKeyword('')}
-              className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          )}
-        </div>
-
-        {/* Filter Badges & Selects */}
-        <div className="flex flex-wrap items-center gap-2">
-          {/* Level Pills */}
-          <div className="flex items-center gap-1 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 p-1">
+      <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-3 dark:border-gray-800/80">
+          <div className="flex flex-wrap items-center gap-2">
             {[
-              { id: 'all', label: '全部分类' },
-              { id: 'critical', label: '严重缺货' },
-              { id: 'warning', label: '缺货告警' },
-              { id: 'overstock', label: '积压告警' },
-              { id: 'normal', label: '正常' },
+              { id: 'all', label: '全部库存', count: stats.totalCount },
+              { id: 'critical', label: '严重缺货', count: stats.criticalCount },
+              { id: 'warning', label: '缺货告警', count: stats.warningCount },
+              { id: 'overstock', label: '积压告警', count: stats.overstockCount },
+              { id: 'normal', label: '库存正常', count: stats.normalCount },
             ].map((lvl) => (
               <button
                 key={lvl.id}
                 onClick={() => setSelectedLevel(lvl.id)}
-                className={`rounded-lg px-2.5 py-1 text-xs font-medium transition-all ${
+                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
                   selectedLevel === lvl.id
-                    ? 'bg-white dark:bg-gray-700 text-amber-600 dark:text-amber-400 shadow-xs'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
                 }`}
               >
-                {lvl.label}
+                <span>{lvl.label}</span>
+                <span
+                  className={`rounded-full px-1.5 text-xs font-bold ${
+                    selectedLevel === lvl.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                  }`}
+                >
+                  {lvl.count}
+                </span>
               </button>
             ))}
           </div>
-
-          {/* Warehouse Dropdown */}
-          <select
-            value={selectedWarehouse}
-            onChange={(e) => setSelectedWarehouse(e.target.value)}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-amber-500"
+          <button
+            onClick={() => showToast('已导出当前库存预警清单', 'success')}
+            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
           >
-            <option value="all">全域仓储节点</option>
-            {warehouseOptions.map((wh) => (
-              <option key={wh} value={wh}>
-                {wh}
-              </option>
-            ))}
-          </select>
+            <Download className="h-3.5 w-3.5" />
+            <span>导出清单</span>
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative w-full sm:w-[400px]">
+            <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder="搜索 SKU 编码、商品名称、规格或供应商..."
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 pl-10 pr-4 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+            {keyword && (
+              <button
+                onClick={() => setKeyword('')}
+                className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+
+          <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:w-auto sm:justify-end">
+            <select
+              value={selectedWarehouse}
+              onChange={(e) => setSelectedWarehouse(e.target.value)}
+              className="w-[150px] rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <option value="all">全域仓储节点</option>
+              {warehouseOptions.map((wh) => (
+                <option key={wh} value={wh}>
+                  {wh}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={handleBatchPurchaseOrder}
+              className="flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <FileSpreadsheet className="h-3.5 w-3.5" />
+              <span>生成采购单</span>
+            </button>
+          </div>
         </div>
       </div>
 

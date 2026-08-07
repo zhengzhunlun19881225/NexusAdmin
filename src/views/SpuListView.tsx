@@ -328,9 +328,56 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
 
       {/* Control & Filter Panel */}
       <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm space-y-4">
-        <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
-          {/* Keyword Search Input */}
-          <div className="relative flex-1 min-w-[240px]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-3 dark:border-gray-800/80">
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { id: 'all', label: '全部 SPU', count: stats.totalSpu },
+              { id: 'on_sale', label: '在售中', count: stats.onSaleCount },
+              { id: 'off_sale', label: '已下架', count: spuList.filter((s) => s.status === 'off_sale').length },
+              { id: 'sold_out', label: '已售罄', count: stats.soldOutCount },
+            ].map((st) => (
+              <button
+                key={st.id}
+                onClick={() => setSelectedStatus(st.id)}
+                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
+                  selectedStatus === st.id
+                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
+                }`}
+              >
+                <span>{st.label}</span>
+                <span
+                  className={`rounded-full px-1.5 text-xs font-bold ${
+                    selectedStatus === st.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                  }`}
+                >
+                  {st.count}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => showToast('已同步刷新商品 SPU 库存与上下架状态', 'success')}
+              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span>刷新数据</span>
+            </button>
+            <button
+              onClick={() => showToast('已导出目前筛选条件下的 SPU 报表 CSV', 'success')}
+              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <Download className="h-3.5 w-3.5" />
+              <span>导出列表</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative w-full sm:w-[400px]">
             <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-gray-400" />
             <input
               type="text"
@@ -349,35 +396,11 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
             )}
           </div>
 
-          {/* Filters & Sorting */}
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Status Selector */}
-            <div className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 p-1">
-              {[
-                { id: 'all', label: '全部状态' },
-                { id: 'on_sale', label: '在售中' },
-                { id: 'off_sale', label: '已下架' },
-                { id: 'sold_out', label: '已售罄' },
-              ].map((st) => (
-                <button
-                  key={st.id}
-                  onClick={() => setSelectedStatus(st.id)}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-medium transition-all ${
-                    selectedStatus === st.id
-                      ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                  }`}
-                >
-                  {st.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Category Select */}
+          <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:w-auto sm:justify-end">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-[150px] rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
               <option value="all">所有大类分类</option>
               {categoryOptions.map((cat) => (
@@ -387,33 +410,23 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
               ))}
             </select>
 
-            {/* Sort Field */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-[150px] rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
               <option value="createdAt">按发布时间</option>
               <option value="totalSales">按累计销量</option>
               <option value="minPrice">按最低价格</option>
             </select>
 
-            {/* Sort Order Toggle */}
             <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               title="切换升序/降序"
             >
               <ArrowUpDown className="h-4 w-4" />
-            </button>
-
-            {/* Export CSV Button */}
-            <button
-              onClick={() => showToast('已导出目前筛选条件下的 SPU 报表 CSV', 'success')}
-              className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>导出</span>
+              <span>{sortOrder === 'desc' ? '降序排列' : '升序排列'}</span>
             </button>
           </div>
         </div>
