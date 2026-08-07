@@ -133,7 +133,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="font-semibold text-gray-900 dark:text-white truncate">
                   {currentWorkspace}
                 </span>
-                <span className="text-xs text-gray-400">切换组织中心</span>
               </div>
             </div>
             <ChevronDown className="h-3.5 w-3.5 text-gray-400 shrink-0" />

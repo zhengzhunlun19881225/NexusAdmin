@@ -71,17 +71,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-gray-200/80 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 px-4 sm:px-6 backdrop-blur-md transition-colors duration-200">
-      {/* Left Area: Sidebar Toggle & Brand Logo */}
+      {/* Left Area: Brand Logo & Sidebar Toggle */}
       <div className="flex items-center gap-3">
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
-          title="切换侧边栏"
-          id="toggle-sidebar-btn"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
-
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-700 via-indigo-600 to-slate-800 text-white shadow-md shadow-indigo-500/20 ring-1 ring-white/20">
@@ -92,15 +83,21 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="font-bold text-base text-gray-900 dark:text-white tracking-tight">
                 NexusAdmin
               </span>
-              <span className="rounded bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/50">
-                智汇云台 v3.2
-              </span>
             </div>
             <span className="text-xs text-gray-500 dark:text-gray-400 font-normal">
               企业级数智化管理系统
             </span>
           </div>
         </div>
+
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+          title="切换侧边栏"
+          id="toggle-sidebar-btn"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
       </div>
 
       {/* Middle Area: Command Palette Trigger */}
