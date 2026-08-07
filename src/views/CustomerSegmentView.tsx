@@ -252,34 +252,32 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Hero Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl">
-        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-        <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-indigo-100 backdrop-blur-md">
-              <PieChart className="h-3.5 w-3.5 text-indigo-200" />
-              <span>客户画像与精准分群模型</span>
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <PieChart className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                分群画像
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white">
-              多维度分群画像与智能营销触达中心
-            </h2>
-            <p className="text-sm text-indigo-100/80">
-              通过 RFM 规则、高低频消费逻辑与流失风险特征，实现客群标签化分层与差异化自动化触达
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+              通过 RFM 规则、高低频消费逻辑与流失风险特征，实现客群标签化分层与差异化自动化触达。
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={handleRecalculateSegments}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
             >
-              <RefreshCw className="h-4 w-4" />
+              <RefreshCw className="h-3.5 w-3.5" />
               <span>重算分群画像</span>
             </button>
             <button
               onClick={handleOpenAddModal}
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-indigo-800 shadow-lg transition hover:bg-indigo-50 active:scale-95"
+              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
             >
               <Plus className="h-4 w-4" />
               <span>创建画像分群</span>
@@ -287,41 +285,68 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
           </div>
         </div>
 
-        {/* Banner Stats */}
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">运行分群规则总数</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-white">{stats.totalCount}</span>
-              <span className="text-xs text-emerald-400">个逻辑组</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">覆盖画像客户总量</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-indigo-300">{stats.totalMembersCovered}</span>
-              <span className="text-xs text-indigo-200/60">人次</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">最高复购率分群</p>
-            <div className="mt-1.5 flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-amber-300 truncate max-w-[120px]">
-                {stats.topRepurchaseSegName}
-              </span>
-              <span className="text-xs text-amber-400">({stats.topRepurchaseRate}%)</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">生效中规则</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-emerald-300">{stats.activeCount}</span>
-              <span className="text-xs text-indigo-200/60">/ {stats.totalCount}</span>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: '运行分群规则总数',
+              value: stats.totalCount,
+              unit: '个逻辑组',
+              helper: '全域客群规则',
+              icon: Layers,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: '覆盖画像客户总量',
+              value: stats.totalMembersCovered.toLocaleString(),
+              unit: '人次',
+              helper: '标签覆盖规模',
+              icon: Users,
+              iconClassName: 'bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-sky-600 dark:text-sky-400',
+            },
+            {
+              label: '最高复购率分群',
+              value: stats.topRepurchaseSegName,
+              unit: `${stats.topRepurchaseRate}%`,
+              helper: '复购表现最佳',
+              icon: TrendingUp,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+            {
+              label: '生效中规则',
+              value: stats.activeCount,
+              unit: `/${stats.totalCount}`,
+              helper: '自动触达运行中',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 truncate text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    {'unit' in metric && metric.unit && (
+                      <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                    )}
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

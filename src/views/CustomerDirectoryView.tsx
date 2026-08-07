@@ -258,25 +258,32 @@ export const CustomerDirectoryView: React.FC<CustomerDirectoryViewProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Hero Banner Stats */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-700 via-indigo-800 to-slate-900 p-6 text-white shadow-xl">
-        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-indigo-200 backdrop-blur-md">
-              <UserCheck className="h-3.5 w-3.5 text-indigo-300" />
-              <span>全域客户 CRM 名录</span>
+      {/* Header & Metrics */}
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <UserCheck className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
+                客户名录
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white">客户全生命周期名录与全景档案</h2>
-            <p className="text-sm text-indigo-200/80">
-              集中式全员客户资产数据库，支持快速检索、标签划分、VIP等级维系与实时账号状态管控
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+              集中式全员客户资产数据库，支持快速检索、标签划分、VIP 等级维系与实时账号状态管控。
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              onClick={() => showToast('已刷新客户名录、画像与会员等级数据', 'success')}
+              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span>刷新数据</span>
+            </button>
             <button
               onClick={handleOpenAddModal}
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400 active:scale-95"
+              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
             >
               <Plus className="h-4 w-4" />
               <span>录入新客户</span>
@@ -284,41 +291,67 @@ export const CustomerDirectoryView: React.FC<CustomerDirectoryViewProps> = ({
           </div>
         </div>
 
-        {/* Banner Stat Cards */}
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">总名录客户数</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-white">{stats.totalCount}</span>
-              <span className="text-xs text-emerald-400">位</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">正常活跃客户</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-emerald-300">{stats.activeCount}</span>
-              <span className="text-xs text-indigo-200/60">/ {stats.totalCount}</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">客户贡献流水总额</p>
-            <div className="mt-1.5 flex items-baseline gap-1">
-              <span className="text-xs text-indigo-300">￥</span>
-              <span className="text-2xl font-black text-amber-300">
-                {stats.totalRevenue.toLocaleString()}
-              </span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
-            <p className="text-xs text-indigo-200/70">核心高价值客户占比</p>
-            <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-2xl font-black text-indigo-200">{stats.highValueRatio}%</span>
-              <span className="text-xs text-indigo-300">({stats.highValueCount}位)</span>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: '总名录客户数',
+              value: stats.totalCount,
+              unit: '位',
+              helper: '全员客户资产',
+              icon: UserCheck2,
+              iconClassName: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-indigo-600 dark:text-indigo-400',
+            },
+            {
+              label: '正常活跃客户',
+              value: stats.activeCount,
+              unit: `/${stats.totalCount}`,
+              helper: '账号状态稳定',
+              icon: CheckCircle2,
+              iconClassName: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+              valueClassName: 'text-emerald-600 dark:text-emerald-400',
+              helperClassName: 'text-emerald-600 dark:text-emerald-400',
+            },
+            {
+              label: '客户贡献流水总额',
+              value: `￥${stats.totalRevenue.toLocaleString()}`,
+              helper: '历史消费累计',
+              icon: DollarSign,
+              iconClassName: 'bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400',
+              valueClassName: 'text-gray-950 dark:text-gray-100',
+              helperClassName: 'text-rose-600 dark:text-rose-400',
+            },
+            {
+              label: '核心高价值客户占比',
+              value: `${stats.highValueRatio}%`,
+              unit: `(${stats.highValueCount}位)`,
+              helper: 'VIP 与高价值画像',
+              icon: Award,
+              iconClassName: 'bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+              valueClassName: 'text-amber-700 dark:text-amber-300',
+              helperClassName: 'text-amber-600 dark:text-amber-400',
+            },
+          ].map((metric) => {
+            const Icon = metric.icon;
+            return (
+              <div key={metric.label} className="flex min-h-[88px] items-center justify-between rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">{metric.label}</p>
+                  <h3 className={`mt-1 text-2xl font-extrabold tracking-tight ${metric.valueClassName}`}>
+                    {metric.value}
+                    {'unit' in metric && metric.unit && (
+                      <span className="ml-1 text-xs font-semibold text-gray-400">{metric.unit}</span>
+                    )}
+                  </h3>
+                  <p className={`mt-0.5 truncate text-xs font-medium ${metric.helperClassName}`}>{metric.helper}</p>
+                </div>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${metric.iconClassName}`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
