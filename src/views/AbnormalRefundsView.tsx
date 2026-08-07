@@ -3,7 +3,6 @@ import {
   AlertTriangle,
   Search,
   Plus,
-  Filter,
   RefreshCw,
   CheckCircle2,
   XCircle,
@@ -474,7 +473,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
 
         {/* Search Input and Type Dropdown */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="relative w-full sm:w-80">
+          <div className="relative w-full sm:w-[400px]">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             <input
               type="text"
@@ -494,14 +493,10 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto overflow-x-auto">
-            <div className="flex items-center gap-1 text-xs text-gray-500 shrink-0">
-              <Filter className="h-3.5 w-3.5" />
-              <span>类型:</span>
-            </div>
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="rounded-xl border border-gray-200/80 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-[150px] shrink-0 rounded-xl border border-gray-200/80 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="all">全部类型</option>
               <option value="仅退款">仅退款</option>
@@ -514,7 +509,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               onClick={() => {
                 setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
               }}
-              className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 shrink-0"
+              className="flex w-[150px] shrink-0 items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               <ArrowUpDown className="h-3.5 w-3.5 text-gray-500" />
               <span>
