@@ -311,10 +311,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
       <div className="space-y-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <div className="text-xs font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-              After-sales Risk Center
-            </div>
-            <div className="mt-2 flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <ShieldAlert className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               <h2 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
                 异常与退款

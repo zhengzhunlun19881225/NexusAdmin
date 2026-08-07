@@ -330,6 +330,10 @@ export default function App() {
         {/* Right Main Content Area */}
         <main
           className={`min-w-0 flex-1 p-5 transition-all duration-300 ${
+            activePath.startsWith('/orders/abnormal') || activePath.startsWith('/orders/refund')
+              ? 'bg-[#F8FBFF]'
+              : ''
+          } ${
             sidebarOpen ? 'lg:ml-64' : 'ml-16'
           }`}
         >
