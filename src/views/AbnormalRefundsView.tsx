@@ -416,11 +416,10 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
         </div>
       </div>
 
-      {/* Workbench & Main Data Table */}
-      <div className="overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="space-y-4 p-4">
-          {/* Quick Status Tabs */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-3 dark:border-gray-800">
+      {/* Filter Tabs & Search Options */}
+      <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 shadow-sm space-y-4">
+        {/* Quick Status Tabs */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 dark:border-gray-800 pb-3">
           <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: 'all', label: '全部工单', count: refunds.length },
@@ -473,8 +472,8 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
           </div>
         </div>
 
-          {/* Search Input and Type Dropdown */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+        {/* Search Input and Type Dropdown */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-80">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             <input
@@ -523,10 +522,12 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               </span>
             </button>
           </div>
-          </div>
         </div>
+      </div>
 
-        <div className="overflow-x-auto border-t border-gray-100 dark:border-gray-800">
+      {/* Main Data Table (Read - 查) */}
+      <div className="rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-800/50 text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
