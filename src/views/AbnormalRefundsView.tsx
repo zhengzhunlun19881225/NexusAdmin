@@ -308,7 +308,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Header & Metrics */}
-      <div className="rounded-2xl border border-gray-100 bg-gradient-to-r from-slate-50 via-white to-indigo-50/70 p-5 shadow-sm dark:border-gray-800 dark:from-gray-950 dark:via-gray-950 dark:to-indigo-950/30">
+      <div className="space-y-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="text-xs font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
@@ -346,7 +346,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
             {
               label: '售后异常工单',
