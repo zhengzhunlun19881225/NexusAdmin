@@ -22,6 +22,7 @@ import { SettingsView } from './views/SettingsView';
 import { AbnormalRefundsView } from './views/AbnormalRefundsView';
 import { LogisticsView } from './views/LogisticsView';
 import { UIKitView } from './views/UIKitView';
+import { PendingApprovalView } from './views/PendingApprovalView';
 
 import {
   MOCK_ORDERS,
@@ -433,8 +434,22 @@ export default function App() {
             />
           )}
 
+          {activePath.startsWith('/orders/approval') && (
+            <PendingApprovalView
+              orders={orders}
+              onOpenDetail={(o) => setSelectedOrderForDetail(o)}
+              onOpenEdit={(o) => {
+                setOrderToEdit(o);
+                setIsNewOrderModalOpen(true);
+              }}
+              onUpdateStatus={handleUpdateStatus}
+              showToast={showToast}
+            />
+          )}
+
           {/* Orders List View */}
           {activePath.startsWith('/orders') &&
+            !activePath.startsWith('/orders/approval') &&
             !activePath.startsWith('/orders/abnormal') &&
             !activePath.startsWith('/orders/refund') &&
             !activePath.startsWith('/orders/logistics') && (
