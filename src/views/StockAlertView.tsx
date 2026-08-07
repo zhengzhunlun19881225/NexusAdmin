@@ -242,14 +242,14 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
       {/* Header & Metrics */}
       <div className="space-y-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <Warehouse className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               <h1 className="text-2xl font-extrabold tracking-tight text-gray-950 dark:text-gray-100">
                 库存预警中心
               </h1>
             </div>
-            <p className="mt-2 max-w-3xl text-xs leading-5 text-gray-500 dark:text-gray-400">
+            <p className="mt-2 max-w-none overflow-hidden text-ellipsis whitespace-nowrap text-xs leading-5 text-gray-500 dark:text-gray-400">
               实时监测华东总仓、华南仓及全国节点的实际物理库存。当低于安全水位阈值时自动触发熔断预警，并按日销模型一键生成采购补货任务单。
             </p>
           </div>
