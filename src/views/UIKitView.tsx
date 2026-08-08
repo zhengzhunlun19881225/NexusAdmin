@@ -60,6 +60,7 @@ import maintenanceIllustration from '../assets/ui-kit-empty/maintenance.png';
 import networkErrorIllustration from '../assets/ui-kit-empty/network-error.png';
 import notificationIllustration from '../assets/ui-kit-empty/notification.png';
 import successIllustration from '../assets/ui-kit-empty/success.png';
+import { actionButton } from '../uiTheme';
 
 const colors = [
   { name: 'Primary', token: 'Indigo 600', value: '#4F46E5', className: 'bg-indigo-600' },
@@ -337,15 +338,15 @@ export const UIKitView: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-indigo-700">
+              <button className={actionButton.primary}>
                 <Plus className="h-4 w-4" />
                 新建记录
               </button>
-              <button className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 font-semibold text-gray-700 hover:bg-gray-50">
+              <button className={actionButton.secondary}>
                 <Download className="h-4 w-4" />
                 导出数据
               </button>
-              <button className="inline-flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-2 font-semibold text-gray-700 hover:bg-gray-200">
+              <button className={actionButton.subtle}>
                 <Eye className="h-4 w-4" />
                 预览
               </button>
@@ -386,28 +387,28 @@ export const UIKitView: React.FC = () => {
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
             <div className="mb-3 text-sm font-bold text-gray-900">按钮 Button</div>
             <div className="flex flex-wrap items-center gap-2">
-              <button className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700">
+              <button className={actionButton.primary}>
                 <Plus className="h-4 w-4" />
                 主按钮
               </button>
-              <button className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">
+              <button className={actionButton.secondary}>
                 <Download className="h-4 w-4" />
                 次按钮
               </button>
-              <button className="inline-flex min-h-10 items-center rounded-xl px-3 py-2 text-sm font-semibold text-indigo-600 hover:bg-indigo-50">
+              <button className="inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-semibold text-indigo-600 transition-all hover:bg-indigo-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/25">
                 文字按钮
               </button>
-              <button aria-label="刷新" className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+              <button aria-label="刷新" className={actionButton.icon}>
                 <RefreshCw className="h-4 w-4" />
               </button>
-              <button className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-100">
+              <button className={actionButton.dangerSoft}>
                 <Trash2 className="h-4 w-4" />
                 危险按钮
               </button>
-              <button disabled className="inline-flex min-h-10 cursor-not-allowed items-center gap-2 rounded-xl border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-400">
+              <button disabled className={actionButton.secondary}>
                 禁用
               </button>
-              <button className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 text-sm font-semibold text-white">
+              <button className={actionButton.primary}>
                 <Loader2 className="h-4 w-4 animate-spin" />
                 加载中
               </button>
@@ -636,8 +637,8 @@ export const UIKitView: React.FC = () => {
                 顶部导航 Top Nav
               </div>
               <div className="flex items-center gap-2">
-                <button className="h-9 rounded-xl bg-indigo-600 px-3 text-sm font-semibold text-white">新建</button>
-                <button aria-label="更多" className="flex h-9 w-9 items-center justify-center rounded-xl border border-gray-200 text-gray-600">
+                <button className={actionButton.primary}>新建</button>
+                <button aria-label="更多" className={actionButton.icon}>
                   <MoreHorizontal className="h-4 w-4" />
                 </button>
               </div>
@@ -652,7 +653,7 @@ export const UIKitView: React.FC = () => {
               </div>
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {['全部', '待审核', '已完成'].map((tab, index) => (
-                  <button key={tab} className={`rounded-xl px-4 py-2 text-sm font-semibold ${index === 0 ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600'}`}>{tab}</button>
+                  <button key={tab} className={`inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-semibold ${index === 0 ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600'}`}>{tab}</button>
                 ))}
               </div>
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
@@ -661,7 +662,7 @@ export const UIKitView: React.FC = () => {
                     <button key={page} className={`h-8 min-w-8 rounded-lg px-2 text-sm font-semibold ${page === 2 ? 'bg-indigo-600 text-white' : 'border border-gray-200 bg-white text-gray-600'}`}>{page}</button>
                   ))}
                 </div>
-                <button className="inline-flex h-9 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-600">
+                <button className={actionButton.secondary}>
                   <ArrowUp className="h-4 w-4" />
                   返回顶部
                 </button>
@@ -724,7 +725,7 @@ export const UIKitView: React.FC = () => {
                 <Bell className="h-4 w-4 text-indigo-600" />
                 通知中心
               </div>
-              <button className="rounded-lg px-2 py-1 text-xs font-semibold text-indigo-600 hover:bg-indigo-50">
+              <button className={actionButton.ghost}>
                 全部已读
               </button>
             </div>
@@ -762,7 +763,7 @@ export const UIKitView: React.FC = () => {
                     <Icon className="h-4 w-4 shrink-0" />
                     <span className="truncate text-sm font-semibold">{message.label}</span>
                   </div>
-                  <button className="rounded-lg px-2 py-1 text-xs font-semibold text-gray-400 hover:bg-gray-50 hover:text-gray-600">
+                  <button className={actionButton.ghost}>
                     关闭
                   </button>
                 </div>
@@ -823,8 +824,8 @@ export const UIKitView: React.FC = () => {
                 <XCircle className="h-4 w-4 text-gray-400" />
               </div>
               <div className="mt-4 flex justify-end gap-2">
-                <button className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-600">取消</button>
-                <button className="rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white">确认</button>
+                <button className={actionButton.secondary}>取消</button>
+                <button className={actionButton.primary}>确认</button>
               </div>
             </div>
           </div>
@@ -851,8 +852,8 @@ export const UIKitView: React.FC = () => {
                   <div className="text-sm font-bold text-gray-900">气泡二次确认</div>
                   <div className="mt-1 text-xs leading-5 text-gray-500">确定归档这条记录吗？</div>
                   <div className="mt-2 flex gap-2">
-                    <button className="rounded-lg px-2 py-1 text-xs font-semibold text-gray-500">取消</button>
-                    <button className="rounded-lg bg-rose-500 px-2 py-1 text-xs font-semibold text-white">删除</button>
+                    <button className={actionButton.ghost}>取消</button>
+                    <button className={actionButton.danger}>删除</button>
                   </div>
                 </div>
               </div>
@@ -901,11 +902,11 @@ export const UIKitView: React.FC = () => {
                 当前筛选条件下没有可展示内容，可调整筛选条件或新建一条记录。
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2">
-                <button className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-indigo-700">
+                <button className={actionButton.primary}>
                   <Plus className="h-4 w-4" />
                   新建记录
                 </button>
-                <button className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 font-semibold text-gray-700 hover:bg-gray-50">
+                <button className={actionButton.secondary}>
                   <Search className="h-4 w-4" />
                   调整筛选
                 </button>
@@ -972,11 +973,11 @@ export const UIKitView: React.FC = () => {
                 数据表格 Table
               </div>
               <div className="flex items-center gap-2">
-                <button className="inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-2 py-1 text-xs font-semibold text-gray-600">
+                <button className={actionButton.secondary}>
                   <Filter className="h-3.5 w-3.5" />
                   筛选
                 </button>
-                <button className="inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-2 py-1 text-xs font-semibold text-gray-600">
+                <button className={actionButton.secondary}>
                   排序
                   <ChevronDown className="h-3.5 w-3.5" />
                 </button>
@@ -1008,7 +1009,7 @@ export const UIKitView: React.FC = () => {
                     </td>
                     <td className="px-4 py-3 font-mono text-xs text-gray-500">{time}</td>
                     <td className="sticky right-0 bg-white px-4 py-3 text-right">
-                      <button className="rounded-lg bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-700">查看</button>
+                      <button className={actionButton.infoSoft}>查看</button>
                     </td>
                   </tr>
                 ))}
@@ -1156,7 +1157,7 @@ export const UIKitView: React.FC = () => {
               <input readOnly value="关键词搜索" className="h-10 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-900" />
               <select className="h-10 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-900"><option>业务模块</option></select>
               <select className="h-10 rounded-xl border border-gray-200 bg-white px-3 text-sm text-gray-900"><option>处理状态</option></select>
-              <button className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white">
+              <button className={actionButton.primary}>
                 <Search className="h-4 w-4" />
                 查询
               </button>
@@ -1204,7 +1205,7 @@ export const UIKitView: React.FC = () => {
                   <div className="truncate text-sm font-bold text-gray-900">{name}</div>
                   <div className="text-xs font-semibold text-gray-500">{size} · {state}</div>
                 </div>
-                <button aria-label="文件操作" className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500">
+                <button aria-label="文件操作" className={actionButton.icon}>
                   <MoreHorizontal className="h-4 w-4" />
                 </button>
               </div>
@@ -1240,7 +1241,7 @@ export const UIKitView: React.FC = () => {
                   </td>
                   <td className="px-4 py-3 font-mono font-semibold text-gray-900">{amount}</td>
                   <td className="px-4 py-3 text-right">
-                    <button className="rounded-lg bg-indigo-50 px-3 py-1.5 font-semibold text-indigo-700">
+                    <button className={actionButton.infoSoft}>
                       查看
                     </button>
                   </td>

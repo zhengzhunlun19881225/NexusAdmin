@@ -29,6 +29,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
+import { actionButton } from '../uiTheme';
 
 interface DashboardViewProps {
   orders: OrderItem[];
@@ -91,14 +92,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => onNavigate('/orders/approval')}
-              className="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs font-bold text-indigo-700 shadow-lg hover:bg-indigo-50 transition-all"
+              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg bg-white px-3 text-sm font-semibold text-indigo-700 shadow-sm transition-all hover:bg-indigo-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               <Clock className="h-4 w-4 text-indigo-600" />
               <span>审核待办订单 ({pendingOrders.length})</span>
             </button>
             <button
               onClick={() => onNavigate('/products/stock')}
-              className="flex items-center gap-2 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 px-4 py-2.5 text-xs font-bold text-white hover:bg-white/25 transition-all"
+              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-white/25 bg-white/15 px-3 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-all hover:bg-white/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               <AlertTriangle className="h-4 w-4 text-amber-300" />
               <span>库存预警 ({lowStockProducts.length})</span>
@@ -199,7 +200,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
             <button
               onClick={() => onNavigate('/analytics/sales')}
-              className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 font-semibold"
+              className={actionButton.ghost}
             >
               <span>进入深度分析</span>
               <ChevronRight className="h-3.5 w-3.5" />
@@ -280,7 +281,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
             <button
               onClick={() => onNavigate('/orders/approval')}
-              className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-semibold"
+              className={actionButton.ghost}
             >
               查看全部 ({pendingOrders.length})
             </button>

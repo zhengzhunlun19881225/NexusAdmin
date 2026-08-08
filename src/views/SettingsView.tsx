@@ -35,7 +35,7 @@ import {
   Cpu,
 } from 'lucide-react';
 import { SystemUser, RoleItem, AuditLogItem, ApiKeyItem } from '../types';
-import { compactBadge, statusBadge } from '../uiTheme';
+import { actionButton, compactBadge, statusBadge } from '../uiTheme';
 
 interface SettingsViewProps {
   systemUsers: SystemUser[];
@@ -662,7 +662,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             {currentTab === 'roles' && (
               <button
                 onClick={handleOpenAddRole}
-                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+                className={actionButton.primary}
               >
                 <Plus className="h-4 w-4" />
                 <span>新增系统角色</span>
@@ -672,7 +672,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             {currentTab === 'users' && (
               <button
                 onClick={handleOpenAddUser}
-                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+                className={actionButton.primary}
               >
                 <UserPlus className="h-4 w-4" />
                 <span>新增管理员账号</span>
@@ -683,14 +683,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               <>
                 <button
                   onClick={handleExportLogsCsv}
-                  className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+                  className={actionButton.secondary}
                 >
                   <Download className="h-3.5 w-3.5" />
                   <span>导出日志 CSV</span>
                 </button>
                 <button
                   onClick={() => setIsAddLogModalOpen(true)}
-                  className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+                  className={actionButton.primary}
                 >
                   <Plus className="h-4 w-4" />
                   <span>手动上报审计</span>
@@ -701,7 +701,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             {currentTab === 'api' && (
               <button
                 onClick={handleOpenAddKey}
-                className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+                className={actionButton.primary}
               >
                 <Key className="h-4 w-4" />
                 <span>创建 API 秘钥</span>
@@ -853,21 +853,21 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setDetailRole(role)}
-                        className="inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                        className={actionButton.secondary}
                       >
                         <Eye className="h-3.5 w-3.5" />
                         <span>查看视角</span>
                       </button>
                       <button
                         onClick={() => handleOpenEditRole(role)}
-                        className="inline-flex items-center gap-1 rounded-xl bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-950/50 dark:text-indigo-300"
+                        className={actionButton.primary}
                       >
                         <Edit2 className="h-3.5 w-3.5" />
                         <span>配置策略</span>
                       </button>
                       <button
                         onClick={() => setDeleteRoleConfirmId(role.id)}
-                        className="rounded-xl border border-gray-200 p-1 text-gray-400 hover:bg-rose-50 hover:text-rose-600 dark:border-gray-800 dark:hover:bg-rose-950/50"
+                        className={actionButton.iconDanger}
                         title="删除角色"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -982,25 +982,25 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => setDetailUser(usr)}
-                              className="rounded-lg border border-gray-200 px-2 py-1 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                              className={actionButton.secondary}
                             >
                               详情
                             </button>
                             <button
                               onClick={() => handleToggleUserStatus(usr)}
-                              className="rounded-lg border border-gray-200 px-2 py-1 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                              className={actionButton.secondary}
                             >
                               {usr.status === 'active' ? '冻结' : '解冻'}
                             </button>
                             <button
                               onClick={() => handleOpenEditUser(usr)}
-                              className="rounded-lg p-1.5 text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950"
+                              className={actionButton.icon}
                             >
                               <Edit2 className="h-3.5 w-3.5" />
                             </button>
                             <button
                               onClick={() => setDeleteUserConfirmId(usr.id)}
-                              className="rounded-lg p-1.5 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950"
+                              className={actionButton.iconDanger}
                             >
                               <Trash2 className="h-3.5 w-3.5" />
                             </button>
@@ -1056,7 +1056,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
               <button
                 onClick={() => setIsClearLogConfirmOpen(true)}
-                className="inline-flex items-center gap-1 rounded-xl border border-rose-200 bg-rose-50/50 px-3 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-100 dark:border-rose-900/50 dark:bg-rose-950/30 dark:text-rose-300"
+                className={actionButton.dangerSoft}
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 <span>归档清空日志</span>
@@ -1176,7 +1176,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                       </span>
                       <button
                         onClick={() => handleCopySecret(keyItem.secretKey)}
-                        className="inline-flex items-center gap-1 rounded-lg bg-indigo-50 px-2 py-1 text-xs font-bold text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-950/80 dark:text-indigo-300"
+                        className={actionButton.primary}
                       >
                         <Copy className="h-3 w-3" />
                         <span>复制完整Secret</span>
@@ -1228,7 +1228,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setResetSecretKeyItem(keyItem)}
-                        className="inline-flex items-center gap-1 rounded-xl border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-100 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-300"
+                        className={actionButton.warningSoft}
                         title="重置安全Secret"
                       >
                         <RefreshCw className="h-3.5 w-3.5" />
@@ -1237,7 +1237,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
                       <button
                         onClick={() => handleOpenEditKey(keyItem)}
-                        className="inline-flex items-center gap-1 rounded-xl bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-950/50 dark:text-indigo-300"
+                        className={actionButton.primary}
                       >
                         <Edit2 className="h-3.5 w-3.5" />
                         <span>编辑</span>
@@ -1245,7 +1245,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
                       <button
                         onClick={() => setDeleteKeyConfirmId(keyItem.id)}
-                        className="rounded-xl border border-gray-200 p-1 text-gray-400 hover:bg-rose-50 hover:text-rose-600 dark:border-gray-800 dark:hover:bg-rose-950/50"
+                        className={actionButton.iconDanger}
                         title="注销秘钥"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -1281,7 +1281,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailRole(null)}
-                className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1315,7 +1315,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800 flex justify-end">
               <button
                 onClick={() => setDetailRole(null)}
-                className="rounded-xl bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200"
+                className={actionButton.subtle}
               >
                 关闭
               </button>
@@ -1335,7 +1335,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsRoleModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1415,13 +1415,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsRoleModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-md hover:bg-indigo-500"
+                  className={actionButton.primary}
                 >
                   保存角色权限
                 </button>
@@ -1450,13 +1450,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteRoleConfirmId(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmDeleteRole}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定删除
               </button>
@@ -1476,7 +1476,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsUserModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1572,13 +1572,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsUserModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-5 py-2 font-semibold text-white hover:bg-indigo-500 shadow-md"
+                  className={actionButton.primary}
                 >
                   保存授权
                 </button>
@@ -1607,13 +1607,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteUserConfirmId(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmDeleteUser}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定注销
               </button>
@@ -1642,7 +1642,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailUser(null)}
-                className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1686,7 +1686,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800 flex justify-end">
               <button
                 onClick={() => setDetailUser(null)}
-                className="rounded-xl bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200"
+                className={actionButton.subtle}
               >
                 关闭
               </button>
@@ -1706,7 +1706,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsAddLogModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1788,13 +1788,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsAddLogModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-amber-500 px-5 py-2 font-semibold text-stone-950 shadow-md hover:bg-amber-400"
+                  className={actionButton.warning}
                 >
                   提交审计记录
                 </button>
@@ -1823,13 +1823,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setIsClearLogConfirmOpen(false)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleClearAuditLogs}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定清空
               </button>
@@ -1856,7 +1856,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailLog(null)}
-                className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1912,7 +1912,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800 flex justify-end">
               <button
                 onClick={() => setDetailLog(null)}
-                className="rounded-xl bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200"
+                className={actionButton.subtle}
               >
                 关闭
               </button>
@@ -1932,7 +1932,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsKeyModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -2042,7 +2042,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   <button
                     type="button"
                     onClick={handleAddIp}
-                    className="rounded-xl bg-emerald-100 px-3 py-2 font-semibold text-emerald-800 hover:bg-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300"
+                    className={actionButton.successSoft}
                   >
                     添加 IP
                   </button>
@@ -2083,13 +2083,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsKeyModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-emerald-600 px-5 py-2 font-semibold text-white shadow-md hover:bg-emerald-500"
+                  className={actionButton.primary}
                 >
                   保存 API 秘钥
                 </button>
@@ -2118,13 +2118,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setResetSecretKeyItem(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmResetSecret}
-                className="w-full rounded-xl bg-amber-500 py-2 text-xs font-semibold text-stone-950 shadow-md hover:bg-amber-400"
+                className={`${actionButton.warning} w-full`}
               >
                 确定重置
               </button>
@@ -2152,13 +2152,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteKeyConfirmId(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmDeleteKey}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定注销
               </button>

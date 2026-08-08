@@ -14,6 +14,7 @@ import {
   Percent,
 } from 'lucide-react';
 import { CouponItem, MarketingActivity } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface MarketingViewProps {
   coupons: CouponItem[];
@@ -139,7 +140,7 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
         {activeTab === 'coupons' && (
           <button
             onClick={handleOpenAddCoupon}
-            className="flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-indigo-700 transition-all self-start sm:self-auto"
+            className={`${actionButton.primary} self-start sm:self-auto`}
           >
             <Plus className="h-4 w-4" />
             <span>创建新优惠券</span>
@@ -151,10 +152,10 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
       <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-2 text-xs font-semibold">
         <button
           onClick={() => setActiveTab('coupons')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
             activeTab === 'coupons'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
           }`}
         >
           <Tag className="h-4 w-4" />
@@ -163,10 +164,10 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
 
         <button
           onClick={() => setActiveTab('activities')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
             activeTab === 'activities'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
           }`}
         >
           <Zap className="h-4 w-4" />
@@ -224,21 +225,23 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => handleToggleCouponStatus(coupon)}
-                    className="rounded-lg border border-gray-200 dark:border-gray-800 px-2 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300"
+                    className={coupon.status === 'active' ? actionButton.warningSoft : actionButton.successSoft}
                   >
                     {coupon.status === 'active' ? '暂停' : '启用'}
                   </button>
 
                   <button
                     onClick={() => handleOpenEditCoupon(coupon)}
-                    className="rounded-lg p-1.5 text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950"
+                    className={actionButton.icon}
+                    title="编辑优惠券"
                   >
                     <Edit2 className="h-3.5 w-3.5" />
                   </button>
 
                   <button
                     onClick={() => handleDeleteCoupon(coupon.id, coupon.title)}
-                    className="rounded-lg p-1.5 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950"
+                    className={actionButton.iconDanger}
+                    title="删除优惠券"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
@@ -300,7 +303,7 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">
                 {editingCoupon ? '编辑优惠券规则' : '创建新营销优惠券'}
               </h3>
-              <button onClick={() => setIsCouponModalOpen(false)} className="text-gray-400">
+              <button onClick={() => setIsCouponModalOpen(false)} className={actionButton.icon}>
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -383,13 +386,13 @@ export const MarketingView: React.FC<MarketingViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsCouponModalOpen(false)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-2 font-semibold text-gray-600 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-5 py-2 font-semibold text-white hover:bg-indigo-700"
+                  className={actionButton.primary}
                 >
                   保存发行
                 </button>

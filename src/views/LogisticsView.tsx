@@ -27,7 +27,7 @@ import {
   Check,
 } from 'lucide-react';
 import { LogisticsItem, LogisticsStatus, LogisticsTrackStep } from '../types';
-import { statusBadge } from '../uiTheme';
+import { actionButton, statusBadge } from '../uiTheme';
 
 interface LogisticsViewProps {
   logisticsList: LogisticsItem[];
@@ -328,14 +328,14 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
           <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={() => showToast('全网物流运力API接口数据同步成功', 'success')}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>刷新轨迹</span>
             </button>
             <button
               onClick={handleOpenCreate}
-              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={actionButton.primary}
               id="create-shipment-ticket-btn"
             >
               <Plus className="h-4 w-4" />
@@ -464,7 +464,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                 a.click();
                 showToast('已导出当前筛选的运单轨迹 JSON', 'success');
               }}
-              className="flex items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-700 px-2.5 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <Download className="h-3.5 w-3.5 text-gray-500" />
               <span>导出发货单</span>
@@ -510,7 +510,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
 
             <button
               onClick={() => setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
-              className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 shrink-0"
+              className={`${actionButton.secondary} w-[150px] shrink-0`}
             >
               <ArrowUpDown className="h-3.5 w-3.5 text-gray-500" />
               <span>发货时间 ({sortOrder === 'desc' ? '最新发货' : '最早发货'})</span>
@@ -562,7 +562,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                                 navigator.clipboard.writeText(item.trackingNo);
                                 showToast(`已复制运单号 ${item.trackingNo}`, 'success');
                               }}
-                              className="text-gray-400 hover:text-sky-600 p-0.5"
+                              className="inline-flex h-6 w-6 items-center justify-center rounded-md text-gray-400 transition-colors hover:bg-sky-50 hover:text-sky-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/25"
                               title="复制单号"
                             >
                               <Copy className="h-3 w-3" />
@@ -637,7 +637,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                           {/* View Track Timeline */}
                           <button
                             onClick={() => setDetailItem(item)}
-                            className="inline-flex items-center gap-1 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 hover:bg-sky-100 px-2 py-1 text-xs font-bold transition-colors"
+                            className={actionButton.infoSoft}
                             title="查看全链路轨迹地图"
                           >
                             <Eye className="h-3 w-3" />
@@ -647,7 +647,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                           {/* Quick Append Node */}
                           <button
                             onClick={() => handleOpenAddTrack(item)}
-                            className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 transition-colors"
+                            className={actionButton.icon}
                             title="追加新节点"
                           >
                             <Plus className="h-3.5 w-3.5" />
@@ -656,7 +656,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                           {/* Print Electronic Waybill */}
                           <button
                             onClick={() => setWaybillPrintItem(item)}
-                            className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-emerald-600 transition-colors"
+                            className={actionButton.iconSuccess}
                             title="预览/打印电子面单"
                           >
                             <Printer className="h-3.5 w-3.5" />
@@ -665,7 +665,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                           {/* Edit */}
                           <button
                             onClick={() => handleOpenEdit(item)}
-                            className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-600 transition-colors"
+                            className={actionButton.icon}
                             title="修改运单"
                           >
                             <Edit className="h-3.5 w-3.5" />
@@ -674,7 +674,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                           {/* Delete */}
                           <button
                             onClick={() => setDeleteConfirmId(item.id)}
-                            className="p-1 rounded-md text-gray-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:text-rose-600 transition-colors"
+                            className={actionButton.iconDanger}
                             title="撤销删除运单"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -704,7 +704,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                   setIsCreating(false);
                   setEditModalItem(null);
                 }}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -877,13 +877,13 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                     setIsCreating(false);
                     setEditModalItem(null);
                   }}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-sky-600 hover:bg-sky-700 text-white px-5 py-2 text-xs font-bold shadow-md transition-all"
+                  className={actionButton.primary}
                 >
                   确认保存
                 </button>
@@ -904,7 +904,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
               </h3>
               <button
                 onClick={() => setAddTrackNodeItem(null)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -982,13 +982,13 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100 dark:border-gray-800">
                 <button
                   onClick={() => setAddTrackNodeItem(null)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   onClick={handleConfirmAddNode}
-                  className="rounded-xl bg-sky-600 hover:bg-sky-700 text-white px-5 py-2 text-xs font-bold shadow-md transition-all"
+                  className={actionButton.primary}
                 >
                   确认追加节点
                 </button>
@@ -1013,7 +1013,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailItem(null)}
-                className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1031,7 +1031,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                   </div>
                   <button
                     onClick={() => setWaybillPrintItem(detailItem)}
-                    className="flex items-center gap-1 text-xs font-semibold text-sky-600 hover:underline"
+                    className={actionButton.infoSoft}
                   >
                     <Printer className="h-3 w-3" />
                     电子面单
@@ -1090,7 +1090,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                   </h4>
                   <button
                     onClick={() => handleOpenAddTrack(detailItem)}
-                    className="flex items-center gap-1 text-xs font-bold text-sky-600 hover:text-sky-700"
+                    className={actionButton.infoSoft}
                   >
                     <Plus className="h-3.5 w-3.5" />
                     <span>追加节点</span>
@@ -1139,13 +1139,13 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
             <div className="border-t border-gray-100 dark:border-gray-800 p-4 bg-gray-50/50 dark:bg-gray-900/50 flex justify-between items-center text-sm">
               <button
                 onClick={() => handleOpenEdit(detailItem)}
-                className="text-gray-600 hover:text-sky-600 font-medium"
+                className={actionButton.secondary}
               >
                 编辑运单档案
               </button>
               <button
                 onClick={() => setDetailItem(null)}
-                className="rounded-xl bg-gray-200 dark:bg-gray-800 px-4 py-1.5 font-semibold text-gray-700 dark:text-gray-300"
+                className={actionButton.subtle}
               >
                 关闭
               </button>
@@ -1160,7 +1160,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl text-gray-900 space-y-4 relative">
             <button
               onClick={() => setWaybillPrintItem(null)}
-              className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+              className={`${actionButton.icon} absolute right-4 top-4`}
             >
               <X className="h-5 w-5" />
             </button>
@@ -1200,7 +1200,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setWaybillPrintItem(null)}
-                className="rounded-lg border border-gray-300 px-4 py-1.5 text-xs font-medium"
+                className={actionButton.secondary}
               >
                 关闭
               </button>
@@ -1209,7 +1209,7 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
                   showToast(`指令已发送至面单打印机：${waybillPrintItem.trackingNo}`, 'success');
                   setWaybillPrintItem(null);
                 }}
-                className="rounded-lg bg-black text-white px-4 py-1.5 text-xs font-bold flex items-center gap-1"
+                className={actionButton.primary}
               >
                 <Printer className="h-3.5 w-3.5" />
                 <span>立即打印面单</span>
@@ -1236,13 +1236,13 @@ export const LogisticsView: React.FC<LogisticsViewProps> = ({
             <div className="flex justify-end gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 取消
               </button>
               <button
                 onClick={() => handleDeleteItem(deleteConfirmId)}
-                className="rounded-xl bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 text-xs font-bold shadow-md"
+                className={actionButton.danger}
               >
                 确认删除
               </button>

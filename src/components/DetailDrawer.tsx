@@ -16,6 +16,7 @@ import {
   Copy
 } from 'lucide-react';
 import { OrderItem } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface DetailDrawerProps {
   order: OrderItem | null;
@@ -55,7 +56,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
                 </span>
                 <button
                   onClick={copyOrderNo}
-                  className="text-gray-400 hover:text-indigo-600 transition-colors"
+                  className="inline-flex h-6 w-6 items-center justify-center rounded-md text-gray-400 transition-colors hover:bg-indigo-50 hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/25"
                   title="复制订单号"
                 >
                   <Copy className="h-3.5 w-3.5" />
@@ -68,7 +69,7 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
 
           <button
             onClick={onClose}
-            className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 transition-colors"
+            className={actionButton.icon}
           >
             <X className="h-5 w-5" />
           </button>
@@ -86,13 +87,13 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => onUpdateStatus(order.id, 'processing')}
-              className="rounded-lg bg-indigo-600 text-white px-2.5 py-1 font-medium hover:bg-indigo-700"
+              className={actionButton.primary}
             >
               通过审核
             </button>
             <button
               onClick={() => onUpdateStatus(order.id, 'refunded')}
-              className="rounded-lg border border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 px-2.5 py-1 font-medium hover:bg-rose-50"
+              className={actionButton.dangerSoft}
             >
               申请退款
             </button>
@@ -264,14 +265,14 @@ export const DetailDrawer: React.FC<DetailDrawerProps> = ({
         <div className="p-4 border-t border-gray-100 dark:border-gray-800 flex justify-end gap-2 bg-gray-50/50 dark:bg-gray-800/40">
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 px-3.5 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100"
+            className={actionButton.secondary}
           >
             <Printer className="h-3.5 w-3.5" />
             <span>打印发货单</span>
           </button>
           <button
             onClick={onClose}
-            className="rounded-xl bg-indigo-600 text-white px-4 py-2 text-xs font-semibold hover:bg-indigo-700"
+            className={actionButton.primary}
           >
             关闭详情面板
           </button>

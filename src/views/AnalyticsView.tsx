@@ -22,6 +22,7 @@ import {
   LineChart,
   Line,
 } from 'recharts';
+import { actionButton } from '../uiTheme';
 
 interface AnalyticsViewProps {
   orders: OrderItem[];
@@ -86,7 +87,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
 
         <button
           onClick={handleExportStatement}
-          className="flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-indigo-700 transition-all self-start sm:self-auto"
+          className={`${actionButton.primary} self-start sm:self-auto`}
         >
           <Download className="h-4 w-4" />
           <span>导出月度对账报表</span>
@@ -97,10 +98,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-2 text-xs font-semibold">
         <button
           onClick={() => setActiveTab('sales')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
             activeTab === 'sales'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
           }`}
         >
           <TrendingUp className="h-4 w-4" />
@@ -109,10 +110,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
 
         <button
           onClick={() => setActiveTab('finance')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
             activeTab === 'finance'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
+              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
           }`}
         >
           <DollarSign className="h-4 w-4" />

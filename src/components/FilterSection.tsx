@@ -23,6 +23,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { FilterState, OrderStatus, PaymentMethod } from '../types';
 import { CATEGORY_OPTIONS, ASSIGNEE_OPTIONS, PRESET_FILTERS } from '../mockData';
+import { actionButton } from '../uiTheme';
 
 interface FilterSectionProps {
   filterState: FilterState;
@@ -138,7 +139,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
           <button
             onClick={() => setSavePresetModalOpen(true)}
-            className="flex items-center gap-1 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 px-2.5 py-1 text-xs text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-400 transition-colors"
+            className={`${actionButton.secondary} border-dashed`}
             title="保存当前筛选条件组合"
           >
             <Save className="h-3 w-3" />
@@ -292,7 +293,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
         {/* Toggle Button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 rounded-xl bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 px-3.5 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-200 transition-all shadow-2xs group"
+          className={`${actionButton.subtle} group`}
           id="toggle-folded-filters-btn"
         >
           <SlidersHorizontal className="h-3.5 w-3.5 text-indigo-500 group-hover:rotate-90 transition-transform duration-300" />
@@ -317,7 +318,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
           <button
             onClick={onReset}
-            className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className={actionButton.secondary}
             id="reset-filter-btn"
           >
             <RotateCcw className="h-3.5 w-3.5 text-gray-400" />
@@ -581,7 +582,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
           <button
             onClick={onReset}
-            className="text-xs text-gray-400 hover:text-rose-600 underline ml-2"
+            className={actionButton.dangerSoft}
           >
             清空所有条件
           </button>
@@ -610,7 +611,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setSavePresetModalOpen(false)}
-                className="rounded-lg px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.secondary}
               >
                 取消
               </button>
@@ -622,7 +623,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                     setNewPresetName('');
                   }
                 }}
-                className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700"
+                className={actionButton.primary}
               >
                 确定保存
               </button>

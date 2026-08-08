@@ -22,7 +22,7 @@ import {
   Hash,
 } from 'lucide-react';
 import { CategoryItem } from '../types';
-import { statusBadge } from '../uiTheme';
+import { actionButton, statusBadge } from '../uiTheme';
 
 interface CategoryConfigViewProps {
   categories: CategoryItem[];
@@ -397,7 +397,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
               {item.level < 3 && (
                 <button
                   onClick={() => openAddSubModal(item)}
-                  className="rounded-lg bg-indigo-50 dark:bg-indigo-950/60 px-2 py-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 transition-colors"
+                  className={actionButton.iconInfo}
                   title="添加下级子类目"
                 >
                   <Plus className="h-3.5 w-3.5" />
@@ -406,11 +406,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
 
               <button
                 onClick={() => handleToggleStatus(item.id)}
-                className={`rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
-                  item.status === 'enabled'
-                    ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 hover:bg-amber-100'
-                    : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100'
-                }`}
+                className={item.status === 'enabled' ? actionButton.warningSoft : actionButton.successSoft}
                 title={item.status === 'enabled' ? '禁用类目' : '启用类目'}
               >
                 {item.status === 'enabled' ? '禁用' : '启用'}
@@ -418,7 +414,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
 
               <button
                 onClick={() => openEditModal(item)}
-                className="rounded-lg bg-gray-100 dark:bg-gray-800 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-colors"
+                className={actionButton.icon}
                 title="编辑属性"
               >
                 <Edit className="h-3.5 w-3.5" />
@@ -426,7 +422,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
 
               <button
                 onClick={() => setDeleteConfirmId(item.id)}
-                className="rounded-lg bg-rose-50 dark:bg-rose-950/60 px-2 py-1 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition-colors"
+                className={actionButton.iconDanger}
                 title="删除类目"
               >
                 <Trash2 className="h-3.5 w-3.5" />
@@ -462,7 +458,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
 
           <button
             onClick={openAddTopModal}
-            className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+            className={`${actionButton.primary} shrink-0`}
           >
             <Plus className="h-4 w-4" />
             <span>添加一级大类目</span>
@@ -548,13 +544,13 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={expandAll}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className={actionButton.secondary}
           >
             展开全部分类
           </button>
           <button
             onClick={collapseAll}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className={actionButton.secondary}
           >
             折叠节点
           </button>
@@ -616,7 +612,7 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
                   setIsCreating(false);
                   setEditItem(null);
                 }}
-                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -736,13 +732,13 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
                     setIsCreating(false);
                     setEditItem(null);
                   }}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700"
+                  className={actionButton.primary}
                 >
                   保存配置
                 </button>
@@ -770,13 +766,13 @@ export const CategoryConfigView: React.FC<CategoryConfigViewProps> = ({
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 取消
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirmId)}
-                className="rounded-xl bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-rose-700"
+                className={actionButton.danger}
               >
                 确认移除
               </button>

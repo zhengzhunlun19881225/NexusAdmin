@@ -16,7 +16,7 @@ import {
   XCircle,
 } from 'lucide-react';
 import { OrderItem, PriorityLevel, RiskLevel } from '../types';
-import { compactBadge, statusBadge } from '../uiTheme';
+import { actionButton, compactBadge, statusBadge } from '../uiTheme';
 
 type ApprovalQueue = 'all' | 'highRisk' | 'highPriority' | 'largeAmount' | 'invoice';
 
@@ -167,7 +167,7 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
           <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={() => showToast('已刷新待审核订单队列')}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <Clock className="h-3.5 w-3.5" />
               <span>刷新队列</span>
@@ -176,7 +176,7 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
               onClick={() => {
                 filteredOrders.forEach((order) => onUpdateStatus(order.id, 'processing'));
               }}
-              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={actionButton.primary}
               disabled={filteredOrders.length === 0}
             >
               <CheckCircle2 className="h-4 w-4" />
@@ -273,7 +273,7 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setSelectedQueue(tab.id as ApprovalQueue)}
-                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
+                className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
                   selectedQueue === tab.id
                     ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
@@ -294,7 +294,7 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
           </div>
           <button
             onClick={() => showToast('已导出当前待审核订单列表 CSV')}
-            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            className={actionButton.secondary}
           >
             <Download className="h-3.5 w-3.5" />
             <span>导出列表</span>
@@ -347,7 +347,7 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
 
             <button
               onClick={() => setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
-              className="flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={`${actionButton.secondary} w-[150px]`}
             >
               <ArrowUpDown className="h-3.5 w-3.5" />
               <span>下单时间 ({sortOrder === 'desc' ? '降序' : '升序'})</span>
@@ -452,28 +452,28 @@ export const PendingApprovalView: React.FC<PendingApprovalViewProps> = ({
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => handleApprove(order)}
-                          className="flex items-center gap-1 rounded-lg bg-amber-500 px-3 text-xs font-bold text-white shadow-sm transition hover:bg-amber-600"
+                          className={actionButton.warning}
                         >
                           <CheckCircle2 className="h-3.5 w-3.5" />
                           <span>审核</span>
                         </button>
                         <button
                           onClick={() => handleReject(order)}
-                          className="flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-3 text-xs font-semibold text-gray-700 transition hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+                          className={actionButton.secondary}
                         >
                           <XCircle className="h-3.5 w-3.5" />
                           <span>驳回</span>
                         </button>
                         <button
                           onClick={() => onOpenDetail(order)}
-                          className="rounded-lg p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                          className={actionButton.icon}
                           title="查看详情"
                         >
                           <Eye className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => onOpenEdit(order)}
-                          className="rounded-lg p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                          className={actionButton.icon}
                           title="编辑订单"
                         >
                           <Edit2 className="h-4 w-4" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Check, Palette, Moon, Sun, Layout, Sparkles } from 'lucide-react';
 import { ThemeColor, LayoutDensity } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface ThemeSettingsDrawerProps {
   isOpen: boolean;
@@ -48,7 +49,7 @@ export const ThemeSettingsDrawer: React.FC<ThemeSettingsDrawerProps> = ({
               外观与交互个性化配置
             </h3>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className={actionButton.icon}>
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -161,7 +162,7 @@ export const ThemeSettingsDrawer: React.FC<ThemeSettingsDrawerProps> = ({
         <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
           <button
             onClick={onClose}
-            className="w-full rounded-xl bg-indigo-600 py-2.5 text-xs font-semibold text-white hover:bg-indigo-700"
+            className={`${actionButton.primary} w-full`}
           >
             保存并应用配置
           </button>

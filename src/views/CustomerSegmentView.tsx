@@ -25,7 +25,7 @@ import {
   Download,
 } from 'lucide-react';
 import { CustomerSegmentItem, CustomerItem } from '../types';
-import { statusBadge } from '../uiTheme';
+import { actionButton } from '../uiTheme';
 
 interface CustomerSegmentViewProps {
   segments: CustomerSegmentItem[];
@@ -270,14 +270,14 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
           <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={handleRecalculateSegments}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>重算分群画像</span>
             </button>
             <button
               onClick={handleOpenAddModal}
-              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={actionButton.primary}
             >
               <Plus className="h-4 w-4" />
               <span>创建画像分群</span>
@@ -362,7 +362,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
               <button
                 key={st.id}
                 onClick={() => setSelectedStatus(st.id)}
-                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
+                className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
                   selectedStatus === st.id
                     ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
@@ -383,7 +383,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
           </div>
           <button
             onClick={() => showToast('已导出当前筛选条件下的分群画像清单 CSV', 'success')}
-            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            className={actionButton.secondary}
           >
             <Download className="h-3.5 w-3.5" />
             <span>导出清单</span>
@@ -429,7 +429,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
                   setSelectedTrend('all');
                   setSelectedStatus('all');
                 }}
-                className="inline-flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
+                className={`${actionButton.secondary} w-[150px]`}
               >
                 <RefreshCw className="h-3.5 w-3.5" />
                 <span>重置条件</span>
@@ -532,11 +532,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
               <div className="mt-5 flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-800 text-xs">
                 <button
                   onClick={() => handleToggleStatus(seg)}
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold transition ${
-                    seg.status === 'active'
-                      ? `${statusBadge.success} hover:bg-emerald-100`
-                      : `${statusBadge.warning} hover:bg-amber-100`
-                  }`}
+                  className={seg.status === 'active' ? actionButton.successSoft : actionButton.warningSoft}
                 >
                   {seg.status === 'active' ? '生效中' : '已暂停'}
                 </button>
@@ -544,21 +540,21 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => setDetailSegment(seg)}
-                    className="rounded-lg p-1.5 text-gray-500 hover:bg-indigo-50 hover:text-indigo-600 dark:text-gray-400 dark:hover:bg-indigo-950/50 dark:hover:text-indigo-300"
+                    className={actionButton.icon}
                     title="看画像详情"
                   >
                     <Eye className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => handleOpenEditModal(seg)}
-                    className="rounded-lg p-1.5 text-gray-500 hover:bg-blue-50 hover:text-blue-600 dark:text-gray-400 dark:hover:bg-blue-950/50 dark:hover:text-blue-300"
+                    className={actionButton.iconInfo}
                     title="编辑规则"
                   >
                     <Edit2 className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => setDeleteConfirmId(seg.id)}
-                    className="rounded-lg p-1.5 text-gray-500 hover:bg-rose-50 hover:text-rose-600 dark:text-gray-400 dark:hover:bg-rose-950/50 dark:hover:text-rose-300"
+                    className={actionButton.iconDanger}
                     title="删除分群"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -586,7 +582,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailSegment(null)}
-                className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -662,7 +658,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
                   onClick={() => {
                     showToast(`已向分群 "${detailSegment.name}" (共${detailSegment.memberCount}人) 一键下发专属定向优惠券及关怀短信！`, 'success');
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 py-2 text-white font-semibold shadow-md hover:bg-indigo-500 active:scale-95 transition"
+                  className={`${actionButton.primary} w-full`}
                 >
                   <Send className="h-3.5 w-3.5" />
                   <span>一键下发精准营销礼包 ({detailSegment.memberCount}人)</span>
@@ -673,7 +669,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
             <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800 flex justify-end">
               <button
                 onClick={() => setDetailSegment(null)}
-                className="rounded-xl bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200"
+                className={actionButton.secondary}
               >
                 关闭
               </button>
@@ -693,7 +689,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -823,7 +819,7 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
                   <button
                     type="button"
                     onClick={handleAddTag}
-                    className="rounded-xl bg-indigo-100 px-3 py-2 font-semibold text-indigo-700 hover:bg-indigo-200 dark:bg-indigo-950/60 dark:text-indigo-300"
+                    className={actionButton.infoSoft}
                   >
                     添加
                   </button>
@@ -852,13 +848,13 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-md hover:bg-indigo-500"
+                  className={actionButton.primary}
                 >
                   保存分群
                 </button>
@@ -887,13 +883,13 @@ export const CustomerSegmentView: React.FC<CustomerSegmentViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定注销
               </button>

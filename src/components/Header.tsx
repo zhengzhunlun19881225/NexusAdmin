@@ -19,6 +19,7 @@ import {
   Plus
 } from 'lucide-react';
 import { NotificationItem, ThemeColor, LayoutDensity } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface HeaderProps {
   sidebarOpen: boolean;
@@ -92,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+          className={actionButton.icon}
           title="切换侧边栏"
           id="toggle-sidebar-btn"
         >
@@ -122,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Quick Add Order Button */}
         <button
           onClick={onOpenNewOrder}
-          className="hidden sm:flex items-center gap-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 text-xs font-medium shadow-sm transition-colors active:scale-95"
+          className="hidden h-8 items-center justify-center gap-1.5 rounded-lg bg-indigo-600 px-3 text-sm font-semibold text-white shadow-sm shadow-indigo-500/20 transition-all hover:bg-indigo-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/30 disabled:pointer-events-none disabled:opacity-50 sm:inline-flex"
           id="header-create-order-btn"
         >
           <Plus className="h-3.5 w-3.5" />
@@ -132,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Search icon button for mobile */}
         <button
           onClick={onOpenCommandPalette}
-          className="flex md:hidden rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-all hover:bg-gray-100 hover:text-indigo-600 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/25 md:hidden dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-indigo-400"
           title="快捷搜索"
         >
           <Search className="h-5 w-5" />
@@ -141,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Fullscreen Toggle */}
         <button
           onClick={toggleFullscreen}
-          className="hidden lg:flex rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+          className="hidden h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-all hover:bg-gray-100 hover:text-indigo-600 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/25 lg:inline-flex dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-indigo-400"
           title={isFullscreen ? '退出全屏' : '全屏显示'}
         >
           {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -150,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Dark Mode Toggle */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+          className={actionButton.icon}
           title={darkMode ? '切换至浅色模式' : '切换至暗黑模式'}
           id="theme-toggle-btn"
         >
@@ -165,7 +166,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+            className={`${actionButton.icon} relative`}
             title="通知消息"
             id="notification-bell-btn"
           >
@@ -195,7 +196,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {unreadCount > 0 && (
                   <button
                     onClick={handleMarkAllAsRead}
-                    className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline"
+                    className="text-sm font-semibold text-indigo-600 hover:underline dark:text-indigo-400"
                   >
                     全部已读
                   </button>
@@ -228,7 +229,7 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="border-t border-gray-100 dark:border-gray-800 p-2 text-center bg-gray-50/50 dark:bg-gray-800/50">
                 <button
                   onClick={() => setShowNotifications(false)}
-                  className="text-xs font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400"
+                  className={actionButton.ghost}
                 >
                   关闭
                 </button>
@@ -240,7 +241,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* System Settings Drawer Trigger */}
         <button
           onClick={onOpenSettings}
-          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+          className={actionButton.icon}
           title="系统界面个性化设置"
           id="system-settings-trigger-btn"
         >
@@ -285,7 +286,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               <button
                 onClick={() => setShowUserMenu(false)}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={`${actionButton.ghost} w-full justify-start`}
               >
                 <User className="h-4 w-4 text-gray-400" />
                 <span>个人资料与设置</span>
@@ -296,7 +297,7 @@ export const Header: React.FC<HeaderProps> = ({
                   setShowUserMenu(false);
                   onOpenSettings();
                 }}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={`${actionButton.ghost} w-full justify-start`}
               >
                 <Shield className="h-4 w-4 text-gray-400" />
                 <span>安全与权限配置</span>
@@ -304,7 +305,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               <button
                 onClick={() => setShowUserMenu(false)}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={`${actionButton.ghost} w-full justify-start`}
               >
                 <HelpCircle className="h-4 w-4 text-gray-400" />
                 <span>帮助与系统文档</span>
@@ -317,7 +318,7 @@ export const Header: React.FC<HeaderProps> = ({
                   setShowUserMenu(false);
                   alert('已安全退出登录');
                 }}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40"
+                className={`${actionButton.dangerSoft} w-full justify-start`}
               >
                 <LogOut className="h-4 w-4" />
                 <span>退出登录</span>

@@ -82,6 +82,7 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from 'lucide-react';
+import { actionButton } from './uiTheme';
 
 export default function App() {
   // Global States
@@ -527,7 +528,7 @@ export default function App() {
                   {/* Refresh */}
                   <button
                     onClick={() => showToast('数据视图已即时刷新!')}
-                    className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    className={actionButton.icon}
                     title="刷新数据"
                   >
                     <RefreshCw className="h-4 w-4" />

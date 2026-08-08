@@ -24,7 +24,7 @@ import {
   Download,
 } from 'lucide-react';
 import { VipTierItem, CustomerItem } from '../types';
-import { statusBadge } from '../uiTheme';
+import { actionButton } from '../uiTheme';
 
 interface VipRightsViewProps {
   vipTiers: VipTierItem[];
@@ -250,14 +250,14 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
           <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={handleRefreshMatrix}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>校验升级资格</span>
             </button>
             <button
               onClick={handleOpenAddModal}
-              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={actionButton.primary}
             >
               <Plus className="h-4 w-4" />
               <span>新增会员等级</span>
@@ -341,7 +341,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
               <button
                 key={st.id}
                 onClick={() => setSelectedStatus(st.id)}
-                className={`flex items-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
+                className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg px-3 text-sm font-semibold transition-all ${
                   selectedStatus === st.id
                     ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-200 dark:shadow-none'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
@@ -362,7 +362,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
           </div>
           <button
             onClick={() => showToast('已导出当前 VIP 权益体系配置 CSV', 'success')}
-            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            className={actionButton.secondary}
           >
             <Download className="h-3.5 w-3.5" />
             <span>导出配置</span>
@@ -396,7 +396,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                   setKeyword('');
                   setSelectedStatus('all');
                 }}
-                className="inline-flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
+                className={`${actionButton.secondary} w-[150px]`}
               >
                 <RefreshCw className="h-3.5 w-3.5" />
                 <span>重置条件</span>
@@ -437,11 +437,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                       <span className="font-mono text-xs text-gray-400">{tier.code}</span>
                       <button
                         onClick={() => handleToggleStatus(tier)}
-                        className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold transition ${
-                          tier.status === 'active'
-                            ? statusBadge.success
-                            : statusBadge.neutral
-                        }`}
+                        className={tier.status === 'active' ? actionButton.successSoft : actionButton.subtle}
                       >
                         {tier.status === 'active' ? '启用中' : '已禁用'}
                       </button>
@@ -496,21 +492,21 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                   <div className="flex items-center gap-2 pt-2 lg:pt-0">
                     <button
                       onClick={() => setDetailTier(tier)}
-                      className="inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                      className={actionButton.secondary}
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>查看明细</span>
                     </button>
                     <button
                       onClick={() => handleOpenEditModal(tier)}
-                      className="inline-flex items-center gap-1 rounded-xl bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-950/50 dark:text-indigo-300"
+                      className={actionButton.infoSoft}
                     >
                       <Edit2 className="h-3.5 w-3.5" />
                       <span>配置特权</span>
                     </button>
                     <button
                       onClick={() => setDeleteConfirmId(tier.id)}
-                      className="rounded-xl border border-gray-200 p-1.5 text-gray-400 hover:bg-rose-50 hover:text-rose-600 dark:border-gray-800 dark:hover:bg-rose-950/50 dark:hover:text-rose-300"
+                      className={actionButton.iconDanger}
                       title="注销等级"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -544,7 +540,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailTier(null)}
-                className="rounded-xl p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -630,14 +626,14 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                   handleOpenEditModal(detailTier);
                   setDetailTier(null);
                 }}
-                className="inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-xs font-semibold text-amber-800 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300"
+                className={actionButton.warningSoft}
               >
                 <Edit2 className="h-3.5 w-3.5" />
                 <span>配置特权规则</span>
               </button>
               <button
                 onClick={() => setDetailTier(null)}
-                className="rounded-xl bg-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200"
+                className={actionButton.secondary}
               >
                 关闭
               </button>
@@ -657,7 +653,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -799,7 +795,7 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                   <button
                     type="button"
                     onClick={handleAddRight}
-                    className="rounded-xl bg-amber-100 px-3 py-2 font-semibold text-amber-800 hover:bg-amber-200 dark:bg-amber-950/60 dark:text-amber-300"
+                    className={actionButton.warningSoft}
                   >
                     添加权益
                   </button>
@@ -841,13 +837,13 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-amber-500 px-5 py-2 text-xs font-semibold text-stone-950 shadow-md hover:bg-amber-400"
+                  className={actionButton.warning}
                 >
                   保存 VIP 等级
                 </button>
@@ -876,13 +872,13 @@ export const VipRightsView: React.FC<VipRightsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="w-full rounded-xl border border-gray-200 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300"
+                className={`${actionButton.secondary} w-full`}
               >
                 取消
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className="w-full rounded-xl bg-rose-600 py-2 text-xs font-semibold text-white shadow-md hover:bg-rose-500"
+                className={`${actionButton.danger} w-full`}
               >
                 确定删除
               </button>

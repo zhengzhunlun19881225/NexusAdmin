@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Plus, Trash2, Check, ShoppingBag } from 'lucide-react';
 import { OrderItem, OrderStatus, PaymentMethod } from '../types';
 import { ASSIGNEE_OPTIONS, CATEGORY_OPTIONS } from '../mockData';
+import { actionButton } from '../uiTheme';
 
 interface OrderFormModalProps {
   orderToEdit?: OrderItem | null;
@@ -80,7 +81,7 @@ export const OrderFormModal: React.FC<OrderFormModalProps> = ({
               {orderToEdit ? '编辑订单条目数据' : '创建新订单'}
             </h3>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className={actionButton.icon}>
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -232,13 +233,13 @@ export const OrderFormModal: React.FC<OrderFormModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl px-4 py-2 text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               取消
             </button>
             <button
               type="submit"
-              className="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 shadow-xs"
+              className={actionButton.primary}
             >
               保存订单条目
             </button>

@@ -15,7 +15,7 @@ import {
   Columns3
 } from 'lucide-react';
 import { OrderItem, OrderStatus, ColumnConfig, LayoutDensity } from '../types';
-import { statusBadge, themeColors } from '../uiTheme';
+import { actionButton, statusBadge, themeColors } from '../uiTheme';
 
 interface DataTableProps {
   orders: OrderItem[];
@@ -186,14 +186,14 @@ export const DataTable: React.FC<DataTableProps> = ({
               <div className="h-3 w-[1px] bg-indigo-300 dark:bg-indigo-700 mx-1"></div>
               <button
                 onClick={onBatchApprove}
-                className="hover:underline flex items-center gap-1"
+                className="inline-flex items-center gap-1 hover:underline"
               >
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 批量审核通过
               </button>
               <button
                 onClick={onBatchDelete}
-                className="hover:underline text-rose-600 dark:text-rose-400 flex items-center gap-1 ml-2"
+                className="ml-2 inline-flex items-center gap-1 text-rose-600 hover:underline dark:text-rose-400"
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 批量删除
@@ -210,7 +210,7 @@ export const DataTable: React.FC<DataTableProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenColumnCustomizer}
-            className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-1.5 text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-2xs"
+            className={actionButton.secondary}
             title="隐藏/显示自定义列"
           >
             <Columns3 className="h-3.5 w-3.5 text-gray-400" />
@@ -219,7 +219,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 
           <button
             onClick={onExportCSV}
-            className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-1.5 text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-2xs"
+            className={actionButton.secondary}
             title="导出为 CSV 表格"
           >
             <Download className="h-3.5 w-3.5 text-gray-400" />
@@ -451,7 +451,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                               <div className="flex items-center justify-end gap-1.5 relative">
                                 <button
                                   onClick={() => onOpenDetail(order)}
-                                  className="rounded-lg p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600"
+                                  className={actionButton.icon}
                                   title="查看详情"
                                 >
                                   <Eye className="h-4 w-4" />
@@ -459,7 +459,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 
                                 <button
                                   onClick={() => onOpenEdit(order)}
-                                  className="rounded-lg p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600"
+                                  className={actionButton.icon}
                                   title="编辑条目"
                                 >
                                   <Edit className="h-4 w-4" />
@@ -509,7 +509,7 @@ export const DataTable: React.FC<DataTableProps> = ({
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
+            className={actionButton.secondary}
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -521,7 +521,7 @@ export const DataTable: React.FC<DataTableProps> = ({
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
+            className={actionButton.secondary}
           >
             <ChevronRight className="h-4 w-4" />
           </button>

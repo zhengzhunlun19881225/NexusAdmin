@@ -1,6 +1,7 @@
 import React from 'react';
 import { Eye, Edit, Clock, Tag, ShoppingCart, UserCheck, ShieldAlert } from 'lucide-react';
 import { OrderItem } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface GridViewProps {
   orders: OrderItem[];
@@ -72,14 +73,15 @@ export const GridView: React.FC<GridViewProps> = ({
             <div className="flex items-center gap-2">
               <button
                 onClick={() => onOpenDetail(order)}
-                className="flex items-center gap-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 hover:bg-indigo-100 text-indigo-600 dark:text-indigo-400 px-3 py-1.5 text-xs font-medium transition-colors"
+                className={actionButton.infoSoft}
               >
                 <Eye className="h-3.5 w-3.5" />
                 <span>详情</span>
               </button>
               <button
                 onClick={() => onOpenEdit(order)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 p-1.5 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
+                title="编辑订单"
               >
                 <Edit className="h-3.5 w-3.5" />
               </button>

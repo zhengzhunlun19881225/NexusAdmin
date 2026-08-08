@@ -23,7 +23,7 @@ import {
   Archive,
 } from 'lucide-react';
 import { ProductSPUItem, SKUVariant } from '../types';
-import { statusBadge } from '../uiTheme';
+import { actionButton, statusBadge } from '../uiTheme';
 
 interface SpuListViewProps {
   spuList: ProductSPUItem[];
@@ -256,7 +256,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
 
           <button
             onClick={openCreateModal}
-            className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+            className={`${actionButton.primary} shrink-0`}
           >
             <Plus className="h-4 w-4" />
             <span>发布新商品 SPU</span>
@@ -361,14 +361,14 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => showToast('已同步刷新商品 SPU 库存与上下架状态', 'success')}
-              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>刷新数据</span>
             </button>
             <button
               onClick={() => showToast('已导出目前筛选条件下的 SPU 报表 CSV', 'success')}
-              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <Download className="h-3.5 w-3.5" />
               <span>导出列表</span>
@@ -422,7 +422,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
 
             <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 px-3 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className={`${actionButton.secondary} w-[150px]`}
               title="切换升序/降序"
             >
               <ArrowUpDown className="h-4 w-4" />
@@ -562,7 +562,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                           {/* View Detail Drawer */}
                           <button
                             onClick={() => setDetailItem(item)}
-                            className="rounded-lg bg-indigo-50 dark:bg-indigo-950/60 px-2 py-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-colors"
+                            className={actionButton.icon}
                             title="查看详情"
                           >
                             <Eye className="h-3.5 w-3.5" />
@@ -571,10 +571,10 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                           {/* Toggle On/Off Sale */}
                           <button
                             onClick={() => handleToggleStatus(item)}
-                            className={`rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
+                            className={`${
                               item.status === 'on_sale'
-                                ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 hover:bg-amber-100'
-                                : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100'
+                                ? actionButton.warningSoft
+                                : actionButton.successSoft
                             }`}
                             title={item.status === 'on_sale' ? '下架商品' : '上架商品'}
                           >
@@ -584,7 +584,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                           {/* Edit SPU */}
                           <button
                             onClick={() => openEditModal(item)}
-                            className="rounded-lg bg-gray-100 dark:bg-gray-800 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                            className={actionButton.icon}
                             title="编辑"
                           >
                             <Edit className="h-3.5 w-3.5" />
@@ -593,7 +593,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                           {/* Delete */}
                           <button
                             onClick={() => setDeleteConfirmId(item.id)}
-                            className="rounded-lg bg-rose-50 dark:bg-rose-950/60 px-2 py-1 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900 transition-colors"
+                            className={actionButton.iconDanger}
                             title="删除"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -630,7 +630,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailItem(null)}
-                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -740,7 +740,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
             <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex justify-end gap-2 bg-gray-50/50 dark:bg-gray-800/40">
               <button
                 onClick={() => setDetailItem(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 关闭
               </button>
@@ -749,7 +749,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                   openEditModal(detailItem);
                   setDetailItem(null);
                 }}
-                className="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700"
+                className={actionButton.primary}
               >
                 编辑此 SPU
               </button>
@@ -777,7 +777,7 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                   setIsCreating(false);
                   setEditItem(null);
                 }}
-                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -926,13 +926,13 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
                     setIsCreating(false);
                     setEditItem(null);
                   }}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700"
+                  className={actionButton.primary}
                 >
                   保存并提交
                 </button>
@@ -960,13 +960,13 @@ export const SpuListView: React.FC<SpuListViewProps> = ({
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 取消
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirmId)}
-                className="rounded-xl bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-rose-700"
+                className={actionButton.danger}
               >
                 确认删除
               </button>

@@ -25,7 +25,7 @@ import {
   Image as ImageIcon,
 } from 'lucide-react';
 import { AbnormalRefundItem, RefundType, RefundStatus } from '../types';
-import { compactBadge, statusBadge } from '../uiTheme';
+import { actionButton, compactBadge, statusBadge } from '../uiTheme';
 
 interface AbnormalRefundsViewProps {
   refunds: AbnormalRefundItem[];
@@ -326,14 +326,14 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               onClick={() => {
                 showToast('已完成全盘异常与退款数据同步刷新', 'success');
               }}
-              className="flex h-9 items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>刷新数据</span>
             </button>
             <button
               onClick={handleOpenCreateModal}
-              className="flex h-9 items-center gap-1.5 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={actionButton.primary}
               id="create-refund-ticket-btn"
             >
               <Plus className="h-4 w-4" />
@@ -463,7 +463,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                 a.click();
                 showToast('已导出当前筛选的异常退款记录 JSON', 'success');
               }}
-              className="flex items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-700 px-2.5 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              className={actionButton.secondary}
             >
               <Download className="h-3.5 w-3.5 text-gray-500" />
               <span>导出列表</span>
@@ -509,7 +509,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               onClick={() => {
                 setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
               }}
-              className="flex w-[150px] shrink-0 items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 py-1.5 px-3 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className={`${actionButton.secondary} w-[150px] shrink-0`}
             >
               <ArrowUpDown className="h-3.5 w-3.5 text-gray-500" />
               <span>
@@ -616,7 +616,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                         {item.status === 'pending' ? (
                           <button
                             onClick={() => handleOpenAuditModal(item)}
-                            className="inline-flex items-center gap-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1 text-xs font-bold shadow-xs transition-colors"
+                            className={actionButton.warning}
                             title="人工审核判定"
                           >
                             <ShieldAlert className="h-3 w-3" />
@@ -625,7 +625,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                         ) : (
                           <button
                             onClick={() => handleOpenAuditModal(item)}
-                            className="inline-flex items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-1 text-xs font-medium transition-colors"
+                            className={actionButton.secondary}
                             title="改动状态/二次裁决"
                           >
                             <span>改状态</span>
@@ -635,7 +635,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                         {/* View Details */}
                         <button
                           onClick={() => setDetailItem(item)}
-                          className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-indigo-600 transition-colors"
+                          className={actionButton.icon}
                           title="查看完整单据与凭证"
                         >
                           <Eye className="h-3.5 w-3.5" />
@@ -644,7 +644,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                         {/* Edit */}
                         <button
                           onClick={() => handleOpenEditModal(item)}
-                          className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-600 transition-colors"
+                          className={actionButton.icon}
                           title="编辑工单"
                         >
                           <Edit className="h-3.5 w-3.5" />
@@ -653,7 +653,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                         {/* Delete */}
                         <button
                           onClick={() => setDeleteConfirmId(item.id)}
-                          className="p-1 rounded-md text-gray-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:text-rose-600 transition-colors"
+                          className={actionButton.iconDanger}
                           title="删除撤销工单"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
@@ -682,7 +682,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                   setIsCreating(false);
                   setEditModalItem(null);
                 }}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -821,13 +821,13 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                     setIsCreating(false);
                     setEditModalItem(null);
                   }}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 text-xs font-bold shadow-md transition-all"
+                  className={actionButton.primary}
                 >
                   保存提交
                 </button>
@@ -848,7 +848,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               </h3>
               <button
                 onClick={() => setAuditModalItem(null)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -918,13 +918,13 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100 dark:border-gray-800">
                 <button
                   onClick={() => setAuditModalItem(null)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   onClick={handleConfirmAudit}
-                  className="rounded-xl bg-amber-600 hover:bg-amber-700 text-white px-5 py-2 text-xs font-bold shadow-md transition-all"
+                  className={actionButton.warning}
                 >
                   确认裁决更新
                 </button>
@@ -949,7 +949,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               </div>
               <button
                 onClick={() => setDetailItem(null)}
-                className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className={actionButton.icon}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1064,7 +1064,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                 onClick={() => {
                   setDeleteConfirmId(detailItem.id);
                 }}
-                className="flex items-center gap-1.5 rounded-xl border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400 hover:bg-rose-50 px-3 py-2 text-xs font-semibold"
+                className={actionButton.dangerSoft}
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 <span>撤销删除</span>
@@ -1073,7 +1073,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleOpenEditModal(detailItem)}
-                  className="flex items-center gap-1.5 rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                  className={actionButton.secondary}
                 >
                   <Edit className="h-3.5 w-3.5" />
                   <span>编辑单据</span>
@@ -1083,7 +1083,7 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
                     handleOpenAuditModal(detailItem);
                     setDetailItem(null);
                   }}
-                  className="flex items-center gap-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 text-xs font-bold"
+                  className={actionButton.warning}
                 >
                   <ShieldAlert className="h-3.5 w-3.5" />
                   <span>裁决审核</span>
@@ -1110,13 +1110,13 @@ export const AbnormalRefundsView: React.FC<AbnormalRefundsViewProps> = ({
             <div className="flex items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 取消
               </button>
               <button
                 onClick={() => handleDeleteItem(deleteConfirmId)}
-                className="rounded-xl bg-rose-600 hover:bg-rose-700 text-white px-5 py-2 text-xs font-bold shadow-md"
+                className={actionButton.danger}
               >
                 确认彻底删除
               </button>

@@ -24,7 +24,7 @@ import {
   Check,
 } from 'lucide-react';
 import { StockAlertItem } from '../types';
-import { stateFill, stateText, statusBadge } from '../uiTheme';
+import { actionButton, stateFill, stateText, statusBadge } from '../uiTheme';
 
 interface StockAlertViewProps {
   stockAlerts: StockAlertItem[];
@@ -257,7 +257,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleBatchPurchaseOrder}
-              className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-xs font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-700"
+              className={`${actionButton.primary} shrink-0`}
             >
               <FileSpreadsheet className="h-4 w-4" />
               <span>生成补货采购单</span>
@@ -282,7 +282,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                 });
                 setIsCreating(true);
               }}
-              className="inline-flex h-9 shrink-0 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 text-xs font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={`${actionButton.secondary} shrink-0`}
             >
               <Plus className="h-4 w-4" />
               <span>添加库存监控</span>
@@ -388,7 +388,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
           </div>
           <button
             onClick={() => showToast('已导出当前库存预警清单', 'success')}
-            className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 shadow-xs transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+            className={actionButton.secondary}
           >
             <Download className="h-3.5 w-3.5" />
             <span>导出清单</span>
@@ -430,7 +430,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
             </select>
             <button
               onClick={handleBatchPurchaseOrder}
-              className="flex w-[150px] items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800/60 dark:text-gray-300 dark:hover:bg-gray-800"
+              className={`${actionButton.secondary} w-[150px]`}
             >
               <FileSpreadsheet className="h-3.5 w-3.5" />
               <span>生成采购单</span>
@@ -608,7 +608,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                                   'success'
                                 )
                               }
-                              className="rounded-lg bg-amber-50 dark:bg-amber-950/60 px-2 py-1 text-xs font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-100 transition-colors"
+                              className={actionButton.warningSoft}
                               title="向供应商下单补货"
                             >
                               补货+{item.suggestedReplenish}
@@ -621,7 +621,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                               setAdjustStockItem(item);
                               setStockAdjustment(0);
                             }}
-                            className="rounded-lg bg-indigo-50 dark:bg-indigo-950/60 px-2 py-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 transition-colors"
+                            className={actionButton.primary}
                             title="盘点加减库存"
                           >
                             盘点
@@ -633,7 +633,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                               setEditThresholdItem(item);
                               setNewThreshold(item.safetyStock);
                             }}
-                            className="rounded-lg bg-gray-100 dark:bg-gray-800 px-2 py-1 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-colors"
+                            className={actionButton.icon}
                             title="调整预警线"
                           >
                             <Edit3 className="h-3.5 w-3.5" />
@@ -642,7 +642,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                           {/* Delete */}
                           <button
                             onClick={() => setDeleteConfirmId(item.id)}
-                            className="rounded-lg bg-rose-50 dark:bg-rose-950/60 px-2 py-1 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition-colors"
+                            className={actionButton.iconDanger}
                             title="移除监控"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -673,7 +673,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
               </div>
               <button
                 onClick={() => setAdjustStockItem(null)}
-                className="p-1 rounded-md text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -710,13 +710,13 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setAdjustStockItem(null)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700"
+                  className={actionButton.primary}
                 >
                   确认盘点变动
                 </button>
@@ -741,7 +741,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
               </div>
               <button
                 onClick={() => setEditThresholdItem(null)}
-                className="p-1 rounded-md text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -768,13 +768,13 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setEditThresholdItem(null)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-amber-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-amber-700"
+                  className={actionButton.warning}
                 >
                   保存设置
                 </button>
@@ -799,7 +799,7 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
               </div>
               <button
                 onClick={() => setIsCreating(false)}
-                className="p-1 rounded-md text-gray-400 hover:bg-gray-100"
+                className={actionButton.icon}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -918,13 +918,13 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsCreating(false)}
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300"
+                  className={actionButton.secondary}
                 >
                   取消
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-amber-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-amber-700"
+                  className={actionButton.warning}
                 >
                   保存监控卡片
                 </button>
@@ -952,13 +952,13 @@ export const StockAlertView: React.FC<StockAlertViewProps> = ({
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3.5 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100"
+                className={actionButton.secondary}
               >
                 取消
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirmId)}
-                className="rounded-xl bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-rose-700"
+                className={actionButton.danger}
               >
                 确认删除
               </button>

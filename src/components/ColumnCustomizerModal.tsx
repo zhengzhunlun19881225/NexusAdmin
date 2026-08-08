@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Check, Columns3, RotateCcw } from 'lucide-react';
 import { ColumnConfig } from '../types';
+import { actionButton } from '../uiTheme';
 
 interface ColumnCustomizerModalProps {
   columns: ColumnConfig[];
@@ -33,7 +34,7 @@ export const ColumnCustomizerModal: React.FC<ColumnCustomizerModalProps> = ({
               自定义列表列显示设置
             </h3>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className={actionButton.icon}>
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -68,7 +69,7 @@ export const ColumnCustomizerModal: React.FC<ColumnCustomizerModalProps> = ({
         <div className="mt-5 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
           <button
             onClick={onResetColumns}
-            className="flex items-center gap-1 text-xs text-gray-500 hover:text-indigo-600"
+            className={actionButton.ghost}
           >
             <RotateCcw className="h-3.5 w-3.5" />
             <span>恢复默认列</span>
@@ -76,7 +77,7 @@ export const ColumnCustomizerModal: React.FC<ColumnCustomizerModalProps> = ({
 
           <button
             onClick={onClose}
-            className="rounded-xl bg-indigo-600 px-4 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700"
+            className={actionButton.primary}
           >
             完成设置
           </button>
