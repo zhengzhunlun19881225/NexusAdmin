@@ -2,9 +2,13 @@ import React from 'react';
 import {
   Activity,
   BarChart3,
+  BriefcaseBusiness,
   Calendar,
+  CalendarDays,
   ChevronDown,
   ChevronRight,
+  ClipboardList,
+  Clock3,
   Copy,
   Download,
   Headphones,
@@ -12,6 +16,7 @@ import {
   Image as ImageIcon,
   LineChart as LineChartIcon,
   Link2,
+  ListChecks,
   Megaphone,
   Newspaper,
   MoreHorizontal,
@@ -21,7 +26,9 @@ import {
   Search,
   Share2,
   Sparkles,
+  SquareCheck,
   Table2,
+  UserRound,
 } from 'lucide-react';
 import {
   Bar,
@@ -156,6 +163,47 @@ const bulletinItems = [
   { title: '论坛论道｜肖钢：大力发展数字经济', date: '11-12' },
   { title: '银行业危机风波未完：仍有一颗定时炸弹滴滴作响！', date: '11-12' },
   { title: '曾比恒大冲更猛，他比许家印更可惜', date: '11-12' },
+];
+
+const runningTasks = [
+  { title: '研发火星电解质水', owner: '李四', time: '10:00-11:00' },
+  { title: '蜜桃乌龙茶全渠道上市', owner: '王武', time: '11:00-12:00' },
+  { title: '2023 情人节&会员日', owner: '张三', time: '14:00-15:00' },
+];
+
+const approvalTasks = [
+  { title: '信息变更申请', count: '2333', tone: 'primary' },
+  { title: '招聘信息申请', count: '67', tone: 'info' },
+  { title: '宣讲会申请', count: '32', tone: 'warning' },
+];
+
+const todoTasks = [
+  { title: '组织学习最新环保法规', owner: '张三', date: '11/07' },
+  { title: '参加2024年度安全知识培训', owner: '郑雨涵', date: '11/08' },
+  { title: '审批新办公设备采购计划', owner: '钱佳艺', date: '11/09' },
+];
+
+const followProjects = [
+  { title: '某生物科技公司', stage: 'A轮', tag: '医疗', count: '5条待办', owner: '张三', tone: 'primary' },
+  { title: '某数字化企业', stage: 'IPO', tag: '互联网', count: '2条待办', owner: '郑雨涵', tone: 'info' },
+  { title: '某美妆公司', stage: '天使轮', tag: '美妆护肤', count: '2条待办', owner: '钱佳艺', tone: 'purple' },
+];
+
+const applicationTasks = [
+  { title: '差旅报销申请', time: '11/08 10:00', owner: '钱佳艺' },
+  { title: '办公用品采购报销', time: '11/08 11:00', owner: '郑雨涵' },
+  { title: '加班调休申请', time: '11/09 12:00', owner: '张三' },
+];
+
+const scheduleDays = [
+  { week: '一', day: '20' },
+  { week: '一', day: '21' },
+  { week: '二', day: '22' },
+  { week: '三', day: '23' },
+  { week: '四', day: '今', active: true },
+  { week: '五', day: '25' },
+  { week: '六', day: '26', muted: true },
+  { week: '日', day: '27', muted: true },
 ];
 
 interface AnswerCardProps {
@@ -373,6 +421,206 @@ const CampaignList = ({ highlighted = false }: { highlighted?: boolean }) => (
         <button className="shrink-0 text-sm font-semibold text-indigo-600">{highlighted ? '08.27截止' : item.action}</button>
       </div>
     ))}
+  </div>
+);
+
+const toneClasses: Record<string, string> = {
+  primary: 'bg-indigo-50 text-indigo-700 border-indigo-100',
+  info: 'bg-sky-50 text-sky-700 border-sky-100',
+  warning: 'bg-amber-50 text-amber-700 border-amber-100',
+  purple: 'bg-violet-50 text-violet-700 border-violet-100',
+};
+
+const UserPill = ({ name }: { name: string }) => (
+  <span className="inline-flex h-6 items-center gap-1 rounded-lg bg-gray-100 px-2 text-xs font-medium text-gray-700">
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-indigo-100 text-[10px] font-bold text-indigo-700">
+      {name.slice(0, 1)}
+    </span>
+    {name}
+  </span>
+);
+
+const TaskStatusList = () => (
+  <div className="space-y-4">
+    <div className="flex items-center gap-5">
+      {['进行中', '未开始', '已结束'].map((tab, index) => (
+        <span key={tab} className={`pb-1 text-sm font-semibold ${index === 0 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="space-y-4">
+      {runningTasks.map((task) => (
+        <div key={task.title} className="space-y-2">
+          <div className="truncate text-sm font-bold text-gray-900">{task.title}</div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-gray-500">
+            <span className="inline-flex items-center gap-2">
+              负责人
+              <UserPill name={task.owner} />
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Clock3 className="h-3.5 w-3.5" />
+              预计完成时间 <span className="font-semibold text-gray-800">{task.time}</span>
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-indigo-600">
+      查看更多
+      <ChevronRight className="h-4 w-4" />
+    </button>
+  </div>
+);
+
+const ApprovalEntryList = () => (
+  <div className="space-y-4">
+    <div className="flex items-center gap-5">
+      {['待我审批', '我的申请'].map((tab, index) => (
+        <span key={tab} className={`pb-1 text-sm font-semibold ${index === 0 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="space-y-3">
+      {approvalTasks.map((task) => (
+        <div key={task.title} className="flex h-10 items-center gap-3 rounded-lg bg-gray-50 px-3">
+          <span className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${toneClasses[task.tone]}`}>
+            <ClipboardList className="h-4 w-4" />
+          </span>
+          <span className="min-w-0 flex-1 truncate text-sm font-bold text-gray-900">{task.title}</span>
+          <span className="text-sm font-bold text-gray-900">{task.count}</span>
+          <span className="text-xs text-gray-500">条</span>
+          <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-indigo-600">
+            去处理
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const TodoCardList = () => (
+  <div className="space-y-4">
+    <div className="flex items-center justify-between gap-3">
+      <h4 className="flex items-center gap-2 text-base font-bold text-gray-900">
+        <span className="h-4 w-1 rounded-full bg-indigo-600" />
+        待办事项
+      </h4>
+      <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-indigo-600">
+        更多
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </div>
+    <div className="flex items-center gap-5 border-b border-gray-200">
+      {['OA待办(6)', '业务待办(2)'].map((tab, index) => (
+        <span key={tab} className={`pb-2 text-sm font-semibold ${index === 0 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="space-y-3">
+      {todoTasks.map((task) => (
+        <div key={task.title} className="rounded-lg bg-gray-50 px-3 py-2">
+          <div className="truncate text-sm font-bold text-gray-900">{task.title}</div>
+          <div className="mt-1 flex items-center justify-between gap-2">
+            <UserPill name={task.owner} />
+            <span className="text-xs text-gray-500">{task.date}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ProjectFollowList = () => (
+  <div className="space-y-3">
+    <div className="flex items-center gap-4 overflow-hidden">
+      {['早期跟进(6)', '过会(7)', '投资尽调(5)', '更多分类'].map((tab, index) => (
+        <span key={tab} className={`shrink-0 pb-1 text-sm font-semibold ${index === 0 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="divide-y divide-gray-100">
+      {followProjects.map((project) => (
+        <div key={project.title} className="py-3">
+          <div className="flex items-center gap-2">
+            <span className="min-w-0 flex-1 truncate text-sm font-bold text-gray-900">{project.title}</span>
+            <span className={`rounded-lg border px-2 py-0.5 text-xs font-semibold ${toneClasses[project.tone]}`}>{project.stage}</span>
+            <span className="rounded-lg bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">{project.tag}</span>
+          </div>
+          <div className="mt-2 flex items-center justify-between gap-3">
+            <UserPill name={project.owner} />
+            <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-indigo-600">
+              {project.count}
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ApplicationList = () => (
+  <div className="space-y-3">
+    <div className="flex items-center gap-5">
+      {['待我审批', '我的申请'].map((tab, index) => (
+        <span key={tab} className={`pb-1 text-sm font-semibold ${index === 1 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="divide-y divide-gray-100">
+      {applicationTasks.map((task) => (
+        <div key={task.title} className="grid grid-cols-[1fr_88px_52px] items-center gap-3 py-3">
+          <div className="min-w-0">
+            <div className="truncate text-sm font-bold text-gray-900">{task.title}</div>
+            <div className="mt-1 text-xs text-gray-500">提交时间 <span className="font-medium text-gray-700">{task.time}</span></div>
+          </div>
+          <div className="min-w-0">
+            <div className="text-xs text-gray-500">当前节点</div>
+            <div className="mt-1"><UserPill name={task.owner} /></div>
+          </div>
+          <button className={actionButton.primary}>催办</button>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ScheduleBoard = () => (
+  <div className="space-y-4">
+    <div className="grid grid-cols-8 gap-1">
+      {scheduleDays.map((day) => (
+        <div key={`${day.week}-${day.day}`} className={`flex flex-col items-center rounded-lg px-2 py-1.5 ${day.active ? 'bg-indigo-50 text-indigo-700' : day.muted ? 'text-gray-300' : 'text-gray-700'}`}>
+          <span className="text-xs">{day.week}</span>
+          <span className={`mt-1 flex h-6 min-w-6 items-center justify-center rounded-full text-sm font-bold ${day.active ? 'bg-indigo-600 px-1 text-white' : ''}`}>{day.day}</span>
+        </div>
+      ))}
+    </div>
+    <div className="relative h-[300px] overflow-hidden rounded-lg border border-gray-100 bg-white">
+      {['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'].map((time, index) => (
+        <div key={time} className="absolute left-0 right-0 flex items-center gap-3" style={{ top: `${index * 20}%` }}>
+          <span className="w-12 text-xs text-gray-500">{time}</span>
+          <span className="h-px flex-1 bg-gray-100" />
+        </div>
+      ))}
+      <div className="absolute left-14 right-3 top-0 h-[38%] rounded-lg border-l-4 border-indigo-600 bg-indigo-50 px-4 py-3 text-indigo-700">
+        <div className="text-sm font-bold">08:00-10:00</div>
+        <div className="mt-1 text-base font-bold">处理审批报销流程</div>
+      </div>
+      <div className="absolute left-14 right-3 top-[58%] h-[18%] rounded-lg border-l-4 border-sky-500 bg-sky-50 px-4 py-3 text-sky-700">
+        <div className="text-sm font-bold">11:00-12:00</div>
+        <div className="mt-1 text-base font-bold">高级职位候选人面试</div>
+      </div>
+      <div className="absolute left-14 right-3 top-[78%] h-[20%] rounded-lg border-l-4 border-indigo-600 bg-indigo-50 px-4 py-3 text-indigo-700">
+        <div className="text-sm font-bold">12:00-13:00</div>
+        <div className="mt-1 text-base font-bold">新人入职培训</div>
+      </div>
+    </div>
   </div>
 );
 
@@ -609,6 +857,50 @@ export const UIComponentLibraryView: React.FC = () => {
 
           <TextMediaCard title="活动提醒卡" icon={Pin}>
             <CampaignList highlighted />
+          </TextMediaCard>
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className={compactBadge.primary}>来自 Figma / 任务类组件</div>
+            <h2 className="mt-3 text-xl font-black text-gray-900">任务类组件画布</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-500">
+              从业务组件库 V3.0 的“任务类组件”节点提取任务列表、审批入口、待办、项目跟进、申请催办和日程结构，并统一适配系统 UI kit 规范。
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={compactBadge.neutral}>任务列表</span>
+            <span className={compactBadge.neutral}>审批待办</span>
+            <span className={compactBadge.neutral}>项目跟进</span>
+            <span className={compactBadge.neutral}>日程</span>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 2xl:grid-cols-3">
+          <TextMediaCard title="任务状态列表" icon={ClipboardList}>
+            <TaskStatusList />
+          </TextMediaCard>
+
+          <TextMediaCard title="审批任务入口" icon={SquareCheck}>
+            <ApprovalEntryList />
+          </TextMediaCard>
+
+          <TextMediaCard title="待办事项" icon={ListChecks}>
+            <TodoCardList />
+          </TextMediaCard>
+
+          <TextMediaCard title="项目跟进任务" icon={BriefcaseBusiness}>
+            <ProjectFollowList />
+          </TextMediaCard>
+
+          <TextMediaCard title="我的申请" icon={UserRound}>
+            <ApplicationList />
+          </TextMediaCard>
+
+          <TextMediaCard title="我的日程" icon={CalendarDays}>
+            <ScheduleBoard />
           </TextMediaCard>
         </div>
       </section>
