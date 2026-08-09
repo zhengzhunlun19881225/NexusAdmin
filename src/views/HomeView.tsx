@@ -146,34 +146,36 @@ const toneClasses: Record<string, { icon: string; bg: string; badge: string; tex
 
 export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
   return (
-    <div className="space-y-5 animate-in fade-in duration-200">
+    <div className="space-y-4 animate-in fade-in duration-200">
       <div className="grid gap-4 xl:grid-cols-[1.55fr_0.9fr]">
-        <section className="relative overflow-hidden rounded-lg border border-gray-200/80 bg-white p-6 shadow-sm">
-          <div className="relative z-10 max-w-xl">
+        <section className="relative min-h-[184px] overflow-hidden rounded-lg border border-indigo-100 bg-gradient-to-br from-indigo-50 via-white to-sky-50 p-5 shadow-sm">
+          <div className="relative z-10 max-w-xl xl:max-w-[58%]">
             <span className={compactBadge.primary}>智能运营中枢</span>
-            <h1 className="mt-4 text-[28px] font-extrabold leading-tight text-gray-900">
+            <h1 className="mt-3 text-2xl font-extrabold leading-tight text-gray-900">
               首页工作台 4.0 全新升级
             </h1>
-            <p className="mt-3 max-w-lg text-sm leading-6 text-gray-500">
-              汇聚订单、库存、客户与知识库关键动作，支持预警追踪、智能补货、经营分析与任务协同。
+            <p className="mt-2 max-w-lg text-xs leading-5 text-gray-600">
+              多维预警、智能补货、数据看板和任务协同，一站式掌握经营动态。
             </p>
             <button
               type="button"
               onClick={() => onNavigate('/products/stock')}
-              className={`${actionButton.primary} mt-5`}
+              className={`${actionButton.ghost} mt-3 px-0 text-indigo-600 hover:bg-transparent hover:text-indigo-700`}
             >
               <span>查看运营建议</span>
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
-          <div className="absolute right-7 top-8 hidden h-40 w-56 lg:block">
-            <div className="absolute inset-x-4 bottom-2 h-16 rounded-lg bg-indigo-100/80 shadow-inner" />
-            <div className="absolute left-12 top-7 h-20 w-20 rounded-lg bg-indigo-500/90 shadow-lg shadow-indigo-200" />
-            <div className="absolute left-24 top-3 h-24 w-24 rounded-lg bg-sky-100 shadow-md" />
-            <div className="absolute right-4 top-12 flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow-md">
-              <Warehouse className="h-6 w-6 text-indigo-600" />
+          <div className="absolute right-7 top-4 hidden h-40 w-60 lg:block" aria-hidden="true">
+            <div className="absolute inset-x-6 bottom-3 h-12 rounded-lg bg-indigo-100/80 shadow-inner" />
+            <div className="absolute left-10 top-9 h-16 w-16 rounded-lg bg-indigo-300/90 shadow-[10px_10px_0_rgba(99,102,241,0.14)]" />
+            <div className="absolute left-24 top-4 h-24 w-24 rounded-lg bg-gradient-to-br from-indigo-400 to-blue-500 shadow-lg shadow-indigo-200/70" />
+            <div className="absolute left-[104px] top-9 h-14 w-14 rounded-lg border border-white/60 bg-white/45" />
+            <div className="absolute right-3 top-12 flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow-md shadow-indigo-100">
+              <Warehouse className="h-6 w-6 text-indigo-600" strokeWidth={2.2} />
             </div>
+            <div className="absolute right-1 top-3 h-7 w-7 rounded-full bg-sky-200/90" />
           </div>
 
           <div className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-1.5 sm:flex">
@@ -183,11 +185,11 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        <section className="rounded-lg border border-gray-200/80 bg-white p-5 shadow-sm">
-          <div className="mb-6 flex items-center justify-between">
+        <section className="min-h-[184px] rounded-lg border border-gray-200/80 bg-white p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">常用功能</h2>
           </div>
-          <div className="grid grid-cols-4 gap-x-4 gap-y-5">
+          <div className="grid grid-cols-4 gap-x-4 gap-y-2">
             {quickActions.map((item) => {
               const Icon = item.icon;
               return (
@@ -195,12 +197,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                   key={item.label}
                   type="button"
                   onClick={() => onNavigate(item.path)}
-                  className="group flex min-h-[78px] flex-col items-center justify-center gap-2 rounded-lg px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                  className="group flex min-h-[58px] flex-col items-center justify-center gap-1.5 rounded-lg px-1 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                 >
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${item.gradient} shadow-sm transition-transform duration-150 group-hover:scale-105`}>
-                    <Icon className="h-5 w-5 text-white" strokeWidth={2.5} />
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${item.gradient} shadow-sm transition-transform duration-150 group-hover:scale-105`}>
+                    <Icon className="h-4 w-4 text-white" strokeWidth={2.5} />
                   </span>
-                  <span className="leading-4">{item.label}</span>
+                  <span className="leading-3">{item.label}</span>
                 </button>
               );
             })}
@@ -208,41 +210,41 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
         </section>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-4">
-        {insightCards.map((item) => {
-          const Icon = item.icon;
-          const tone = toneClasses[item.tone];
-          return (
-            <section key={item.title} className="rounded-lg border border-gray-200/80 bg-white p-5 shadow-sm">
-              <div className="flex items-start justify-between gap-3">
-                <div>
+      <div className="grid gap-4 xl:grid-cols-[1.55fr_0.9fr]">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {insightCards.map((item) => {
+            const Icon = item.icon;
+            const tone = toneClasses[item.tone];
+            return (
+              <section key={item.title} className="relative min-h-[146px] overflow-hidden rounded-lg border border-gray-200/80 bg-white p-4 shadow-sm">
+                <div className="relative z-10 max-w-[78%]">
                   <h3 className="text-sm font-bold text-gray-900">{item.title}</h3>
-                  <p className="mt-2 min-h-[40px] text-xs leading-5 text-gray-500">{item.desc}</p>
+                  <p className="mt-2 text-xs leading-5 text-gray-500">{item.desc}</p>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate(item.path)}
+                    className={`mt-3 inline-flex h-8 items-center gap-1 rounded-lg px-1 text-xs font-semibold ${tone.text} hover:bg-gray-50`}
+                  >
+                    <span>{item.action}</span>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </button>
                 </div>
-                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${tone.bg}`}>
+                <span className={`absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-lg ${tone.bg}`}>
                   <Icon className={`h-5 w-5 ${tone.icon}`} />
                 </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => onNavigate(item.path)}
-                className={`mt-4 inline-flex h-8 items-center gap-1.5 rounded-lg px-2 text-sm font-semibold ${tone.text} hover:bg-gray-50`}
-              >
-                <span>{item.action}</span>
-                <ChevronRight className="h-3.5 w-3.5" />
-              </button>
-            </section>
-          );
-        })}
+              </section>
+            );
+          })}
+        </div>
 
-        <section className="rounded-lg border border-gray-200/80 bg-white p-5 shadow-sm">
+        <section className="min-h-[146px] rounded-lg border border-gray-200/80 bg-white p-4 shadow-sm">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="text-sm font-bold text-gray-900">系统消息</h3>
             <button type="button" className="text-xs font-semibold text-indigo-600 hover:text-indigo-700">
               查看全部
             </button>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {systemMessages.map((item) => (
               <div key={item.label} className="flex items-center justify-between gap-3 text-xs">
                 <div className="flex min-w-0 items-center gap-2">
@@ -268,11 +270,14 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
             <RefreshCw className="h-4 w-4" />
           </button>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {metrics.map((item) => (
-            <div key={item.label} className="rounded-lg border border-gray-100 bg-gray-50/70 p-4">
+        <div className="grid gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
+          {metrics.map((item, index) => (
+            <div
+              key={item.label}
+              className={`px-4 ${index === 0 ? 'pl-0' : ''} ${index > 0 ? 'lg:border-l lg:border-gray-100' : ''}`}
+            >
               <div className="text-xs font-semibold text-gray-500">{item.label}</div>
-              <div className="mt-3 text-xl font-extrabold text-gray-900">{item.value}</div>
+              <div className="mt-2 text-xl font-extrabold text-gray-900">{item.value}</div>
               <div className="mt-2 flex items-center gap-2 text-xs">
                 <span className="text-gray-500">较上月</span>
                 <span className={toneClasses[item.tone].text}>{item.delta}</span>
