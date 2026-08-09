@@ -32,7 +32,8 @@ import {
   Building2,
   Check,
   Search,
-  Sparkles
+  Sparkles,
+  Grid2X2
 } from 'lucide-react';
 import { MenuItem } from '../types';
 import { MENU_TREE } from '../mockData';
@@ -71,6 +72,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   KeyRound,
   MessageSquare,
   Sparkles,
+  Grid2X2,
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -79,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   activePath,
   setActivePath,
 }) => {
-  const [expandedItems, setExpandedItems] = useState<string[]>(['orders', 'products']);
+  const [expandedItems, setExpandedItems] = useState<string[]>(['ui-kit', 'orders', 'products']);
   const [currentWorkspace, setCurrentWorkspace] = useState('华东数字运营中心');
   const [showWorkspaceMenu, setShowWorkspaceMenu] = useState(false);
   const [menuSearch, setMenuSearch] = useState('');

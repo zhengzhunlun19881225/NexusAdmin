@@ -152,7 +152,10 @@ export const MENU_TREE: MenuItem[] = [
     id: 'ui-kit',
     title: 'UI kit',
     iconName: 'Sparkles',
-    path: '/ui-kit',
+    children: [
+      { id: 'ui-kit-foundation', title: 'UI kit', iconName: 'Sparkles', path: '/ui-kit' },
+      { id: 'ui-component-library', title: 'UI组件库', iconName: 'Grid2X2', path: '/ui-components' },
+    ],
   },
   {
     id: 'im',
@@ -1651,4 +1654,3 @@ export const MOCK_STOCK_ALERTS: StockAlertItem[] = [
     lastStockCheck: '2026-07-28 09:00:00',
   },
 ];
-

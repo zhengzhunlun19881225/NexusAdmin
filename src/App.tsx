@@ -24,6 +24,7 @@ import { LogisticsView } from './views/LogisticsView';
 import { UIKitView } from './views/UIKitView';
 import { PendingApprovalView } from './views/PendingApprovalView';
 import { IMView } from './views/IMView';
+import { UIComponentLibraryView } from './views/UIComponentLibraryView';
 
 import {
   MOCK_ORDERS,
@@ -337,6 +338,7 @@ export default function App() {
             activePath.startsWith('/orders/refund') ||
             activePath.startsWith('/orders/logistics') ||
             activePath.startsWith('/products') ||
+            activePath.startsWith('/ui-components') ||
             activePath.startsWith('/im')
               ? 'bg-[#F8FBFF]'
               : ''
@@ -354,6 +356,8 @@ export default function App() {
           )}
 
           {activePath === '/ui-kit' && <UIKitView />}
+
+          {activePath === '/ui-components' && <UIComponentLibraryView />}
 
           {activePath.startsWith('/im') && (
             <IMView
