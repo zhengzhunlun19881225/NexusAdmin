@@ -143,6 +143,12 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
 
 export const MENU_TREE: MenuItem[] = [
   {
+    id: 'home',
+    title: '首页',
+    iconName: 'Home',
+    path: '/home',
+  },
+  {
     id: 'dashboard',
     title: '工作台仪表盘',
     iconName: 'LayoutDashboard',

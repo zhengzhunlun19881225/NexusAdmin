@@ -13,6 +13,7 @@ import { CommandPalette } from './components/CommandPalette';
 import { ThemeSettingsDrawer } from './components/ThemeSettingsDrawer';
 
 // Views
+import { HomeView } from './views/HomeView';
 import { DashboardView } from './views/DashboardView';
 import { ProductsView } from './views/ProductsView';
 import { CustomersView } from './views/CustomersView';
@@ -90,7 +91,7 @@ import { actionButton } from './uiTheme';
 export default function App() {
   // Global States
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activePath, setActivePath] = useState('/dashboard');
+  const [activePath, setActivePath] = useState('/home');
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.localStorage.getItem('nexus-dark-mode') === 'true';
@@ -335,6 +336,7 @@ export default function App() {
         {/* Right Main Content Area */}
         <main
           className={`min-w-0 flex-1 p-5 transition-all duration-300 ${
+            activePath.startsWith('/home') ||
             activePath.startsWith('/orders/abnormal') ||
             activePath.startsWith('/orders/refund') ||
             activePath.startsWith('/orders/logistics') ||
@@ -348,6 +350,10 @@ export default function App() {
             sidebarOpen ? 'lg:ml-64' : 'ml-16'
           }`}
         >
+          {activePath === '/home' && (
+            <HomeView onNavigate={(path) => setActivePath(path)} />
+          )}
+
           {activePath === '/dashboard' && (
             <DashboardView
               orders={orders}

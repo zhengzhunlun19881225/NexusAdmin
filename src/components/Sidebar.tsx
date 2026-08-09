@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Home,
   LayoutDashboard,
   ShoppingBag,
   ListOrdered,
@@ -47,6 +48,7 @@ interface SidebarProps {
 }
 
 const ICON_MAP: Record<string, React.ElementType> = {
+  Home,
   LayoutDashboard,
   ShoppingBag,
   ListOrdered,
