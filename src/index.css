@@ -185,6 +185,17 @@
     border-radius: 8px !important;
   }
 
+  /* Icon-entry tiles intentionally exceed the standard 32px command button height. */
+  .quick-action-tile {
+    height: 72px !important;
+    min-height: 72px !important;
+  }
+
+  .quick-action-tile .quick-action-label {
+    font-size: 12px !important;
+    line-height: 18px !important;
+  }
+
   textarea {
     border-radius: 8px !important;
   }

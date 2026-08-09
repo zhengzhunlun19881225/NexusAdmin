@@ -197,12 +197,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                   key={item.label}
                   type="button"
                   onClick={() => onNavigate(item.path)}
-                  className="group flex min-h-[64px] flex-col items-center justify-center gap-1.5 rounded-lg px-1 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                  className="quick-action-tile group flex flex-col items-center justify-center gap-1.5 rounded-lg px-1 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                 >
                   <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${item.gradient} shadow-sm transition-transform duration-150 group-hover:scale-105`}>
                     <Icon className="h-5 w-5 text-white" strokeWidth={2.5} />
                   </span>
-                  <span className="leading-3">{item.label}</span>
+                  <span className="quick-action-label">{item.label}</span>
                 </button>
               );
             })}
