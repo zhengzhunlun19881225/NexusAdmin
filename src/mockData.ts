@@ -166,6 +166,12 @@ export const MENU_TREE: MenuItem[] = [
     path: '/im',
   },
   {
+    id: 'knowledge-base',
+    title: '知识库',
+    iconName: 'BookOpen',
+    path: '/knowledge-base',
+  },
+  {
     id: 'orders',
     title: '订单数据管理',
     iconName: 'ShoppingBag',

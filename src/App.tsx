@@ -25,6 +25,7 @@ import { UIKitView } from './views/UIKitView';
 import { PendingApprovalView } from './views/PendingApprovalView';
 import { IMView } from './views/IMView';
 import { UIComponentLibraryView } from './views/UIComponentLibraryView';
+import { KnowledgeBaseView } from './views/KnowledgeBaseView';
 
 import {
   MOCK_ORDERS,
@@ -339,6 +340,7 @@ export default function App() {
             activePath.startsWith('/orders/logistics') ||
             activePath.startsWith('/products') ||
             activePath.startsWith('/ui-components') ||
+            activePath.startsWith('/knowledge-base') ||
             activePath.startsWith('/im')
               ? 'bg-[#F8FBFF]'
               : ''
@@ -365,6 +367,8 @@ export default function App() {
               showToast={showToast}
             />
           )}
+
+          {activePath === '/knowledge-base' && <KnowledgeBaseView />}
 
           {activePath.startsWith('/products') && (
             <ProductsView

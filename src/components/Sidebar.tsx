@@ -29,6 +29,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  BookOpen,
   Building2,
   Check,
   Search,
@@ -71,6 +72,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   FileText,
   KeyRound,
   MessageSquare,
+  BookOpen,
   Sparkles,
   Grid2X2,
 };
