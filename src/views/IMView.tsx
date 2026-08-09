@@ -334,10 +334,18 @@ export const IMView: React.FC<IMViewProps> = ({ customers, showToast }) => {
 
           <div className="min-h-0 flex-1 overflow-y-auto">
             {filteredConversations.map((item) => (
-              <button
+              <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setSelectedId(item.id)}
-                className={`flex !h-auto !min-h-[88px] w-full items-start gap-3 border-b border-gray-100 px-3 py-3 text-left transition dark:border-gray-800 ${
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setSelectedId(item.id);
+                  }
+                }}
+                className={`flex min-h-[92px] w-full cursor-pointer items-start gap-3 border-b border-gray-100 px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-500/25 dark:border-gray-800 ${
                   selectedConversation.id === item.id
                     ? 'bg-indigo-50/80 dark:bg-indigo-950/30'
                     : 'bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/60'
@@ -369,7 +377,7 @@ export const IMView: React.FC<IMViewProps> = ({ customers, showToast }) => {
                     )}
                   </div>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         </aside>
