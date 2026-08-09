@@ -24,6 +24,7 @@ import {
   ShieldCheck,
   FileText,
   KeyRound,
+  MessageSquare,
   ChevronDown,
   ChevronRight,
   ChevronsLeft,
@@ -68,6 +69,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   ShieldCheck,
   FileText,
   KeyRound,
+  MessageSquare,
   Sparkles,
 };
 

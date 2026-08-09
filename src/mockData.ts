@@ -155,6 +155,14 @@ export const MENU_TREE: MenuItem[] = [
     path: '/ui-kit',
   },
   {
+    id: 'im',
+    title: 'IM 功能',
+    iconName: 'MessageSquare',
+    badge: 4,
+    badgeColor: 'bg-indigo-500',
+    path: '/im',
+  },
+  {
     id: 'orders',
     title: '订单数据管理',
     iconName: 'ShoppingBag',
@@ -1643,5 +1651,4 @@ export const MOCK_STOCK_ALERTS: StockAlertItem[] = [
     lastStockCheck: '2026-07-28 09:00:00',
   },
 ];
-
 

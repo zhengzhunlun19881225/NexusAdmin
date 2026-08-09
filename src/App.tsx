@@ -23,6 +23,7 @@ import { AbnormalRefundsView } from './views/AbnormalRefundsView';
 import { LogisticsView } from './views/LogisticsView';
 import { UIKitView } from './views/UIKitView';
 import { PendingApprovalView } from './views/PendingApprovalView';
+import { IMView } from './views/IMView';
 
 import {
   MOCK_ORDERS,
@@ -335,7 +336,8 @@ export default function App() {
             activePath.startsWith('/orders/abnormal') ||
             activePath.startsWith('/orders/refund') ||
             activePath.startsWith('/orders/logistics') ||
-            activePath.startsWith('/products')
+            activePath.startsWith('/products') ||
+            activePath.startsWith('/im')
               ? 'bg-[#F8FBFF]'
               : ''
           } ${
@@ -352,6 +354,13 @@ export default function App() {
           )}
 
           {activePath === '/ui-kit' && <UIKitView />}
+
+          {activePath.startsWith('/im') && (
+            <IMView
+              customers={customers}
+              showToast={showToast}
+            />
+          )}
 
           {activePath.startsWith('/products') && (
             <ProductsView
