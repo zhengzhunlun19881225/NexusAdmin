@@ -3,12 +3,20 @@ import {
   Activity,
   BarChart3,
   Calendar,
+  ChevronDown,
+  ChevronRight,
   Copy,
   Download,
+  Headphones,
+  HelpCircle,
+  Image as ImageIcon,
   LineChart as LineChartIcon,
   Link2,
+  Megaphone,
+  Newspaper,
   MoreHorizontal,
   PieChart as PieChartIcon,
+  Pin,
   Play,
   Search,
   Share2,
@@ -92,6 +100,64 @@ const tableRows = [
   ['北京', '358', '22', '+4.8%', '62%', '明细'],
 ];
 
+const noticeItems = [
+  { title: '关于2024年人培养方案建设的通知', date: '2024.08.27', isNew: true },
+  { title: 'B端工作台系统维护计划安排', date: '2024.08.25', isNew: true },
+  { title: '关于2024年人培养方案建设的通知', date: '2024.08.24' },
+  { title: 'HRM系统安全升级公告：加强访问控制，保障员工信息安全', date: '2024.08.21' },
+  { title: '全员赋能，精准决策高效管理', date: '2024.08.21' },
+];
+
+const helpItems = [
+  {
+    question: '保证金应缴金额如何组成？',
+    answer: '“店铺保证金”包括“基础保证金”、“浮动保证金”，商家需要根据保证金标准完成缴纳。',
+  },
+  {
+    question: '如何开通支付账户？',
+    answer: '进入账户中心完成主体认证后，可按流程开通收款账户并绑定结算银行卡。',
+  },
+  {
+    question: '已完成支付方式设置，接下来要做什么来完成开店？',
+    answer: '继续完善店铺资料、运费模板和售后策略，提交后等待平台审核。',
+  },
+  {
+    question: '无货源如何实现合规经营？',
+    answer: '需要确保商品来源、售后承诺、物流履约和发票能力符合平台规则。',
+  },
+];
+
+const campaignItems = [
+  {
+    title: '积分大派兑：你的积分可以兑换这些好礼！',
+    desc: '通过多品类积分换购的形式，累计消耗积分200w+，3000+用户参与。',
+    action: '去报名',
+  },
+  {
+    title: '评价有奖：分享你的购物体验，赢取精美礼品！',
+    desc: '鼓励用户在购买后留下评价，通过评价互动提高商品的信誉度。',
+    action: '去报名',
+  },
+  {
+    title: '购物返现季：消费越多，返现越多，优惠不停！',
+    desc: '提供不同比例的现金返现，帮助活动周期内提升复购转化。',
+    action: '去报名',
+  },
+];
+
+const newsItems = [
+  { title: '无人机全程拍摄！时隔三十多年再探切尔诺贝利核电站', date: '2022-11-12', tone: 'from-indigo-100 to-sky-100' },
+  { title: '纽约时报｜没有中国，世界还能造动力电池吗', date: '2022-11-12', tone: 'from-sky-100 to-emerald-100' },
+  { title: '停产、裁员，这家老牌合资车企撑不住了？', date: '2022-11-12', tone: 'from-amber-100 to-rose-100' },
+];
+
+const bulletinItems = [
+  { title: '纽约时报｜没有中国，世界还能造动力电池吗', date: '11-12' },
+  { title: '论坛论道｜肖钢：大力发展数字经济', date: '11-12' },
+  { title: '银行业危机风波未完：仍有一颗定时炸弹滴滴作响！', date: '11-12' },
+  { title: '曾比恒大冲更猛，他比许家印更可惜', date: '11-12' },
+];
+
 interface AnswerCardProps {
   title: string;
   icon: React.ElementType;
@@ -143,6 +209,170 @@ const ChartToolbar = () => (
     <button className={actionButton.icon} aria-label="导出">
       <Download className="h-4 w-4" />
     </button>
+  </div>
+);
+
+interface TextMediaCardProps {
+  title: string;
+  icon: React.ElementType;
+  children: React.ReactNode;
+  className?: string;
+}
+
+const TextMediaCard: React.FC<TextMediaCardProps> = ({ title, icon: Icon, children, className = '' }) => (
+  <section className={`rounded-lg border border-gray-200 bg-white p-4 shadow-sm ${className}`}>
+    <div className="mb-4 flex items-center justify-between gap-3">
+      <h3 className="flex items-center gap-2 text-base font-bold text-gray-900">
+        <Icon className="h-4 w-4 text-indigo-600" />
+        {title}
+      </h3>
+      <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-indigo-600">
+        更多
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </div>
+    {children}
+  </section>
+);
+
+const NewTag = () => (
+  <span className="inline-flex h-5 shrink-0 items-center rounded-lg bg-indigo-600 px-2 text-xs font-semibold text-white">
+    New
+  </span>
+);
+
+const NoticeList = ({ soft = false }: { soft?: boolean }) => (
+  <div className="space-y-2">
+    {noticeItems.map((item) => (
+      <div
+        key={`${item.title}-${item.date}-${soft ? 'soft' : 'plain'}`}
+        className={`flex h-8 items-center gap-3 rounded-lg ${soft ? 'border border-white/80 bg-white/80 px-3' : ''}`}
+      >
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          {item.isNew && <NewTag />}
+          <span className="truncate text-sm font-medium text-gray-800">{item.title}</span>
+        </div>
+        <span className="shrink-0 text-xs text-gray-500">{item.date}</span>
+      </div>
+    ))}
+  </div>
+);
+
+const HelpList = () => (
+  <div className="space-y-3">
+    {helpItems.map((item) => (
+      <div key={item.question} className="space-y-1">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-bold text-white">
+            Q
+          </span>
+          <span className="truncate text-sm font-bold text-gray-900">{item.question}</span>
+        </div>
+        <p className="line-clamp-1 pl-7 text-xs leading-5 text-gray-500">{item.answer}</p>
+      </div>
+    ))}
+    <button className="mt-2 flex h-8 w-full items-center justify-center gap-1 rounded-lg border border-gray-200 bg-white text-sm font-semibold text-gray-700">
+      <Headphones className="h-4 w-4" />
+      联系客服
+    </button>
+  </div>
+);
+
+const FaqList = () => (
+  <div className="space-y-3">
+    <div className="flex items-start gap-2">
+      <ChevronDown className="mt-1 h-4 w-4 shrink-0 text-indigo-600" />
+      <div className="min-w-0 flex-1">
+        <div className="truncate text-sm font-bold text-gray-900">保证金应缴金额如何组成？</div>
+        <p className="mt-1 line-clamp-2 text-xs leading-5 text-gray-500">
+          国税总局发布了《支持协调发展税费优惠政策指引》。此次政策提及216项税收优惠
+          <span className="font-semibold text-indigo-600"> 查看全部</span>
+        </p>
+      </div>
+    </div>
+    {['如何开通支付账户？', '有几种支付方式？', '无货源如何实现在抖音电商合规经营？', '如何发布新产品？'].map((item) => (
+      <div key={item} className="flex h-8 items-center gap-2">
+        <ChevronRight className="h-4 w-4 text-gray-400" />
+        <span className="truncate text-sm font-semibold text-gray-800">{item}</span>
+      </div>
+    ))}
+  </div>
+);
+
+const FeaturedNotice = () => (
+  <div className="space-y-3">
+    <div className="rounded-lg bg-gray-50 p-3">
+      <div className="flex gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white text-indigo-600 shadow-xs">
+          <Megaphone className="h-5 w-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-bold text-gray-900">智慧农业风起，中科原动力带机器人走进田间地头</div>
+          <p className="mt-1 line-clamp-1 text-xs leading-5 text-gray-500">
+            国家电网上海电力将紧急调用、启动应急电源，组织出动应急救援队伍。
+          </p>
+        </div>
+      </div>
+      <div className="mt-3 flex items-center justify-between border-t border-gray-200 pt-2">
+        <span className="text-xs text-gray-500">2020-12-12 13:33</span>
+        <button className="inline-flex h-8 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-indigo-600">
+          立即查看
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+    <div className="space-y-1">
+      {bulletinItems.map((item) => (
+        <div key={item.title} className="flex h-8 items-center gap-3 border-b border-gray-100 last:border-b-0">
+          <span className="h-2 w-2 shrink-0 rounded-full border-2 border-indigo-600" />
+          <span className="min-w-0 flex-1 truncate text-sm text-gray-800">{item.title}</span>
+          <span className="text-xs text-gray-500">{item.date}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const NewsImageList = () => (
+  <div className="space-y-4">
+    <div className="flex items-center gap-5">
+      {['新闻动态', '行领导动态', '总行动态'].map((tab, index) => (
+        <span key={tab} className={`pb-1 text-sm font-semibold ${index === 0 ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-700'}`}>
+          {tab}
+        </span>
+      ))}
+    </div>
+    <div className="space-y-3">
+      {newsItems.map((item) => (
+        <div key={item.title} className="flex items-center gap-3">
+          <div className={`flex h-12 w-20 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${item.tone} text-indigo-600`}>
+            <ImageIcon className="h-5 w-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-sm font-medium text-gray-900">{item.title}</div>
+            <div className="mt-1 text-xs text-gray-500">{item.date}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const CampaignList = ({ highlighted = false }: { highlighted?: boolean }) => (
+  <div className="space-y-3">
+    {campaignItems.map((item) => (
+      <div
+        key={`${item.title}-${highlighted ? 'highlighted' : 'plain'}`}
+        className={`flex items-center gap-3 rounded-lg ${highlighted ? 'bg-indigo-50/70 px-3 py-2' : ''}`}
+      >
+        {highlighted && <Pin className="h-4 w-4 shrink-0 text-indigo-600" />}
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-bold text-gray-900">{item.title}</div>
+          <p className="mt-1 truncate text-xs text-gray-500">{item.desc}</p>
+        </div>
+        <button className="shrink-0 text-sm font-semibold text-indigo-600">{highlighted ? '08.27截止' : item.action}</button>
+      </div>
+    ))}
   </div>
 );
 
@@ -330,6 +560,58 @@ export const UIComponentLibraryView: React.FC = () => {
           </div>
         </AnswerCard>
       </div>
+
+      <section className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className={compactBadge.primary}>来自 Figma / 图文类组件</div>
+            <h2 className="mt-3 text-xl font-black text-gray-900">图文类组件画布</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-500">
+              从业务组件库 V3.0 的“图文类组件”节点提取结构和内容，统一改成本系统 UI kit 的字体、颜色、8px 圆角和 32px 控件规范。
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={compactBadge.neutral}>通知</span>
+            <span className={compactBadge.neutral}>问答</span>
+            <span className={compactBadge.neutral}>图文列表</span>
+            <span className={compactBadge.neutral}>营销活动</span>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 2xl:grid-cols-4">
+          <TextMediaCard title="通知公告" icon={Megaphone}>
+            <NoticeList />
+          </TextMediaCard>
+
+          <TextMediaCard title="浅底通知公告" icon={Megaphone} className="bg-gradient-to-b from-indigo-50 to-white">
+            <NoticeList soft />
+          </TextMediaCard>
+
+          <TextMediaCard title="帮助中心" icon={HelpCircle}>
+            <HelpList />
+          </TextMediaCard>
+
+          <TextMediaCard title="常见问题" icon={HelpCircle}>
+            <FaqList />
+          </TextMediaCard>
+
+          <TextMediaCard title="重点通知" icon={Newspaper}>
+            <FeaturedNotice />
+          </TextMediaCard>
+
+          <TextMediaCard title="图片新闻列表" icon={ImageIcon}>
+            <NewsImageList />
+          </TextMediaCard>
+
+          <TextMediaCard title="营销活动" icon={Pin}>
+            <CampaignList />
+          </TextMediaCard>
+
+          <TextMediaCard title="活动提醒卡" icon={Pin}>
+            <CampaignList highlighted />
+          </TextMediaCard>
+        </div>
+      </section>
     </div>
   );
 };
