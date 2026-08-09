@@ -337,7 +337,7 @@ export const IMView: React.FC<IMViewProps> = ({ customers, showToast }) => {
               <button
                 key={item.id}
                 onClick={() => setSelectedId(item.id)}
-                className={`flex w-full gap-3 border-b border-gray-100 px-3 py-3 text-left transition dark:border-gray-800 ${
+                className={`flex !h-auto !min-h-[88px] w-full items-start gap-3 border-b border-gray-100 px-3 py-3 text-left transition dark:border-gray-800 ${
                   selectedConversation.id === item.id
                     ? 'bg-indigo-50/80 dark:bg-indigo-950/30'
                     : 'bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800/60'
@@ -601,7 +601,7 @@ const ProfileSection: React.FC<{
 );
 
 const ProfileFold: React.FC<{ title: string; count: string }> = ({ title, count }) => (
-  <button className="flex h-11 w-full items-center justify-between border-b border-gray-200/80 px-4 text-sm font-bold text-gray-900 transition hover:bg-gray-50 dark:border-gray-800 dark:text-gray-100 dark:hover:bg-gray-800/60">
+  <button className="flex !h-11 w-full items-center justify-between border-b border-gray-200/80 px-4 text-sm font-bold text-gray-900 transition hover:bg-gray-50 dark:border-gray-800 dark:text-gray-100 dark:hover:bg-gray-800/60">
     <span className="flex items-center gap-2">
       <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
       {title}
