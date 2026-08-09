@@ -35,14 +35,14 @@ interface HomeViewProps {
 }
 
 const quickActions = [
-  { label: '新建订单', icon: ShoppingBag, path: '/orders/all', color: 'text-indigo-600', bg: 'bg-indigo-50' },
-  { label: '入库登记', icon: Archive, path: '/products/stock', color: 'text-amber-600', bg: 'bg-amber-50' },
-  { label: '库存查询', icon: Search, path: '/products/list', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-  { label: '售后处理', icon: ShieldCheck, path: '/orders/abnormal', color: 'text-rose-600', bg: 'bg-rose-50' },
-  { label: '知识上传', icon: Upload, path: '/knowledge-base', color: 'text-sky-600', bg: 'bg-sky-50' },
-  { label: '数据看板', icon: BarChart3, path: '/analytics/sales', color: 'text-violet-600', bg: 'bg-violet-50' },
-  { label: '客户分群', icon: Sparkles, path: '/customers/segment', color: 'text-cyan-600', bg: 'bg-cyan-50' },
-  { label: '系统审计', icon: FileText, path: '/settings/audit', color: 'text-slate-600', bg: 'bg-slate-100' },
+  { label: '新建订单', icon: ShoppingBag, path: '/orders/all', gradient: 'bg-gradient-to-br from-indigo-500 to-violet-600' },
+  { label: '入库登记', icon: Archive, path: '/products/stock', gradient: 'bg-gradient-to-br from-amber-400 to-orange-500' },
+  { label: '库存查询', icon: Search, path: '/products/list', gradient: 'bg-gradient-to-br from-emerald-400 to-teal-500' },
+  { label: '售后处理', icon: ShieldCheck, path: '/orders/abnormal', gradient: 'bg-gradient-to-br from-rose-500 to-red-500' },
+  { label: '知识上传', icon: Upload, path: '/knowledge-base', gradient: 'bg-gradient-to-br from-sky-400 to-blue-600' },
+  { label: '数据看板', icon: BarChart3, path: '/analytics/sales', gradient: 'bg-gradient-to-br from-violet-500 to-fuchsia-600' },
+  { label: '客户分群', icon: Sparkles, path: '/customers/segment', gradient: 'bg-gradient-to-br from-cyan-500 to-blue-500' },
+  { label: '系统审计', icon: FileText, path: '/settings/audit', gradient: 'bg-gradient-to-br from-slate-500 to-indigo-600' },
 ];
 
 const insightCards = [
@@ -184,10 +184,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
         </section>
 
         <section className="rounded-lg border border-gray-200/80 bg-white p-5 shadow-sm">
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-6 flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">常用功能</h2>
           </div>
-          <div className="grid grid-cols-4 gap-x-3 gap-y-2">
+          <div className="grid grid-cols-4 gap-x-4 gap-y-5">
             {quickActions.map((item) => {
               const Icon = item.icon;
               return (
@@ -195,10 +195,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
                   key={item.label}
                   type="button"
                   onClick={() => onNavigate(item.path)}
-                  className="group flex min-h-[76px] flex-col items-center justify-center gap-2 rounded-lg px-2 py-2 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                  className="group flex min-h-[78px] flex-col items-center justify-center gap-2 rounded-lg px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                 >
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${item.bg} transition-transform duration-150 group-hover:scale-105`}>
-                    <Icon className={`h-5 w-5 ${item.color}`} />
+                  <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${item.gradient} shadow-sm transition-transform duration-150 group-hover:scale-105`}>
+                    <Icon className="h-5 w-5 text-white" strokeWidth={2.5} />
                   </span>
                   <span className="leading-4">{item.label}</span>
                 </button>
